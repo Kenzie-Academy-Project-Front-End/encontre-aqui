@@ -1,7 +1,15 @@
-import React from "react";
+import { ToastContainer } from 'react-toastify';
+import { UserProvider } from './contexts/UserContext';
+import { RoutesMain } from './routes';
+import { GlobalStyle } from './styles/global';
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
-  return <></>;
+export function App() {
+  return (
+    <UserProvider>
+      <GlobalStyle />
+      <ToastContainer />
+      <RoutesMain />
+    </UserProvider>
+  );
 }
-
-export default App;
