@@ -15,6 +15,7 @@ import {
 } from '../../components/Form';
 import { ThemeButton } from '../../styles/buttons';
 import Logo from '../../assets/img/logo.svg';
+import imageBackground from '../../assets/img/imagem_register.svg';
 
 export const RegisterUser = () => {
   const { registerUser } = useContext(UserContext);
@@ -28,9 +29,9 @@ export const RegisterUser = () => {
   return (
     <Container>
       <StyledRegisterUser>
-        <div className='logo'>
+        <figure className='logo'>
           <img src={Logo} alt='logo' />
-        </div>
+        </figure>
 
         <Form onSubmit={handleSubmit(registerUser)}>
           <div className='title'>
@@ -98,6 +99,11 @@ export const RegisterUser = () => {
               Login
             </ThemeButton>
           </div>
+          <img
+            className='imageBackground'
+            src={imageBackground}
+            alt='imageBackground'
+          />
         </Form>
       </StyledRegisterUser>
     </Container>
