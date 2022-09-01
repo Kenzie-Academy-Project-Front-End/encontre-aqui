@@ -4,7 +4,7 @@ export const StyledAnonymousHeader = styled.div`
   width: 100%;
   height: 8.625rem;
   display: flex;
-  padding: 0 8.5rem;
+  padding: 0 2rem;
   justify-content: space-between;
   align-items: center;
   background: var(--color-dark-blue-2);
