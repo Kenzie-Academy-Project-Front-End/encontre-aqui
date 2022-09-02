@@ -45,6 +45,17 @@ export const ThemeButton = styled.button<IThemeButtonProps>`
             opacity: 0.8;
           }
         `;
+      case 'dark-blue':
+        return css`
+          background: var(--color-dark-blue-2);
+          border: 2px solid var(--color-orange);
+
+          &:hover {
+            background: var(--color-dark-blue-2);
+            border: 2px solid var(--color-orange);
+            opacity: 0.8;
+          }
+        `;
       default:
         return false;
     }
