@@ -1,11 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { ItemContext } from '../../contexts/ItemContext';
 import { ThemeButton } from '../../styles/buttons';
 import { StyledAnonymousFilter } from './styles';
 
 function AnonymousFilter() {
-  const { setFilter } = useContext(ItemContext);
-  const [inputValue, setInputValue] = useState<string>('');
+  const { setFilter, inputValue, setInputValue } = useContext(ItemContext);
 
   return (
     <StyledAnonymousFilter>

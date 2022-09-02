@@ -24,8 +24,10 @@ interface IItem {
 
 interface IItemContext {
   itens: IItem[];
+  inputValue: string;
   errorClaim: () => void;
   setFilter: Dispatch<SetStateAction<string>>;
+  setInputValue: Dispatch<SetStateAction<string>>;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -33,6 +35,7 @@ export const ItemContext = createContext({} as IItemContext);
 export function ItemProvider({ children }: IItemProviderProps) {
   const [itens, setItens] = useState<IItem[]>([]);
   const [filter, setFilter] = useState<string>('all');
+  const [inputValue, setInputValue] = useState<string>('');
 
   useEffect(() => {
     if (filter === 'all' || filter === '') {
@@ -68,7 +71,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
         setItens(search);
       });
     }
-  }, [filter]);
+  }, [filter, inputValue]);
 
   function errorClaim() {
     toast.warn('Faça login ou cadastre-se para reivindicar um item', {
@@ -79,7 +82,9 @@ export function ItemProvider({ children }: IItemProviderProps) {
   }
 
   return (
-    <ItemContext.Provider value={{ itens, errorClaim, setFilter }}>
+    <ItemContext.Provider
+      value={{ itens, errorClaim, setFilter, inputValue, setInputValue }}
+    >
       {children}
       <ToastContainer
         pauseOnHover={false}
