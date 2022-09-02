@@ -45,7 +45,7 @@ export const LandingPage = () => {
         </div>
       </StyledLandingPage>
 
-      <div>
+      <div className='figure'>
         <figure>
           <img src={robo} alt='Oops 404 Error' />
         </figure>

@@ -11,27 +11,24 @@ export const StyledLandingPage = styled.div`
   .buttons {
     display: flex;
     text-align: center;
-    flex-direction: column;
+    flex-direction: row;
     min-width: 50%;
     margin-top: 1rem;
     gap: 1.5rem;
-
-    & > button {
-      font-size: 1.563rem;
-      width: 170px;
-      height: 54px;
-    }
   }
 
-  @media (min-width: 400px) {
+  @media (max-width: 600px) {
+    h3 {
+      display: none;
+    }
     .buttons {
-      flex-direction: row;
+      flex-direction: column;
     }
   }
 
   @media (max-width: 1000px) {
     margin: 1vw auto;
-    width: 90%;
+    width: 100%;
     align-items: center;
 
     figure {
@@ -54,6 +51,29 @@ export const StyledLandingPage = styled.div`
         width: 170px;
         height: 54px;
         padding: 2px 5px;
+      }
+    }
+  }
+
+  @media (min-width: 1440px) {
+    width: 50%;
+
+    h1 {
+      font-size: 5rem;
+      line-height: 97px;
+    }
+
+    h3 {
+      font-size: 1.875rem;
+      line-height: 36px;
+    }
+
+    .buttons {
+      gap: 2.5rem;
+
+      button {
+        width: 250px;
+        height: 70px;
       }
     }
   }

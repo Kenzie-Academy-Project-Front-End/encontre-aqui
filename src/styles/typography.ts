@@ -32,13 +32,13 @@ export const ThemeTitle = styled(BaseTitle)<IThemeTitleProps>`
         `;
       case 'title5':
         return css`
-          font-size: 65px;
-          line-height: 77px;
+          font-size: 40px;
+          line-height: 97px;
         `;
       case 'title6':
         return css`
           font-size: 25px;
-          line-height: 30px;
+          line-height: 36px;
         `;
       default:
         return false;
