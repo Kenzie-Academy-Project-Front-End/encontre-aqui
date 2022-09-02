@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ItemContext } from '../../contexts/ItemContext';
 import { ThemeButton } from '../../styles/buttons';
 import { StyledAnonymousFilter } from './styles';
 
 function AnonymousFilter() {
   const { setFilter } = useContext(ItemContext);
+  const [inputValue, setInputValue] = useState<string>('');
 
   return (
     <StyledAnonymousFilter>
@@ -34,13 +35,20 @@ function AnonymousFilter() {
       <div className='div-filter-search'>
         <input
           type='text'
+          value={inputValue}
           placeholder='Pesquisar Item'
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            setFilter(inputValue);
+          }}
         />
         <ThemeButton
           size='medium'
           buttonColor='orange'
-          onClick={() => setFilter('')}
+          onClick={() => {
+            setInputValue('');
+            setFilter('');
+          }}
         >
           Limpar
         </ThemeButton>
