@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import { api } from '../services/api';
 
 interface IItemProviderProps {
@@ -16,6 +17,7 @@ interface IItem {
 
 interface IItemContext {
   itens: IItem[];
+  errorClaim: () => void;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -27,7 +29,22 @@ export function ItemProvider({ children }: IItemProviderProps) {
     api.get<IItem[]>('/itens').then((res) => setItens(res.data));
   }, []);
 
+  function errorClaim() {
+    toast.warn('Faça login ou cadastre-se para reivindicar um item', {
+      position: 'top-right',
+      autoClose: 3000,
+      closeOnClick: false,
+    });
+  }
+
   return (
-    <ItemContext.Provider value={{ itens }}>{children}</ItemContext.Provider>
+    <ItemContext.Provider value={{ itens, errorClaim }}>
+      {children}
+      <ToastContainer
+        pauseOnHover={false}
+        draggable={false}
+        closeButton={false}
+      />
+    </ItemContext.Provider>
   );
 }
