@@ -11,7 +11,7 @@ export const StyledAnonymousMain = styled.div`
 export const CardList = styled.ul`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 

@@ -5,7 +5,7 @@ import { ThemeTitle } from '../../styles/typography';
 import { CardContainer } from './styles';
 
 function Card() {
-  const { itens } = useContext(ItemContext);
+  const { itens, errorClaim } = useContext(ItemContext);
 
   return (
     <>
@@ -20,7 +20,11 @@ function Card() {
               <span>Descrição: </span>
               {item.description}
             </p>
-            <ThemeButton size='small' buttonColor='dark-blue'>
+            <ThemeButton
+              size='small'
+              buttonColor='dark-blue'
+              onClick={() => errorClaim()}
+            >
               Reivindicar
             </ThemeButton>
           </div>
