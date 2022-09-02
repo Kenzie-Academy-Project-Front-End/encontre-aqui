@@ -24,8 +24,10 @@ interface IItem {
 
 interface IItemContext {
   itens: IItem[];
+  inputValue: string;
   errorClaim: () => void;
   setFilter: Dispatch<SetStateAction<string>>;
+  setInputValue: Dispatch<SetStateAction<string>>;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -33,18 +35,43 @@ export const ItemContext = createContext({} as IItemContext);
 export function ItemProvider({ children }: IItemProviderProps) {
   const [itens, setItens] = useState<IItem[]>([]);
   const [filter, setFilter] = useState<string>('all');
+  const [inputValue, setInputValue] = useState<string>('');
 
   useEffect(() => {
-    if (filter === 'all') {
+    if (filter === 'all' || filter === '') {
       api.get<IItem[]>('/itens').then((res) => {
         setItens(res.data);
       });
-    } else {
+    }
+    if (filter === 'found' || filter === 'lost') {
       api.get<IItem[]>(`/itens?status=${filter}`).then((res) => {
         setItens(res.data);
       });
     }
-  }, [filter]);
+    if (
+      filter !== 'all' &&
+      filter !== 'found' &&
+      filter !== 'lost' &&
+      filter !== ''
+    ) {
+      api.get<IItem[]>('/itens').then((res) => {
+        const search = res.data.filter(
+          (item) =>
+            item.name
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .toLowerCase()
+              .includes(
+                filter
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .toLowerCase()
+              ) && item
+        );
+        setItens(search);
+      });
+    }
+  }, [filter, inputValue]);
 
   function errorClaim() {
     toast.warn('Faça login ou cadastre-se para reivindicar um item', {
@@ -55,7 +82,9 @@ export function ItemProvider({ children }: IItemProviderProps) {
   }
 
   return (
-    <ItemContext.Provider value={{ itens, errorClaim, setFilter }}>
+    <ItemContext.Provider
+      value={{ itens, errorClaim, setFilter, inputValue, setInputValue }}
+    >
       {children}
       <ToastContainer
         pauseOnHover={false}

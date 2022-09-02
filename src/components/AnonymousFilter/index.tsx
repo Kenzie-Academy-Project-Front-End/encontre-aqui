@@ -4,7 +4,7 @@ import { ThemeButton } from '../../styles/buttons';
 import { StyledAnonymousFilter } from './styles';
 
 function AnonymousFilter() {
-  const { setFilter } = useContext(ItemContext);
+  const { setFilter, inputValue, setInputValue } = useContext(ItemContext);
 
   return (
     <StyledAnonymousFilter>
@@ -32,9 +32,24 @@ function AnonymousFilter() {
         </ThemeButton>
       </div>
       <div className='div-filter-search'>
-        <input type='text' placeholder='Pesquisar Item' />
-        <ThemeButton size='medium' buttonColor='orange'>
-          Buscar
+        <input
+          type='text'
+          value={inputValue}
+          placeholder='Pesquisar Item'
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            setFilter(inputValue);
+          }}
+        />
+        <ThemeButton
+          size='medium'
+          buttonColor='orange'
+          onClick={() => {
+            setInputValue('');
+            setFilter('');
+          }}
+        >
+          Limpar
         </ThemeButton>
       </div>
     </StyledAnonymousFilter>
