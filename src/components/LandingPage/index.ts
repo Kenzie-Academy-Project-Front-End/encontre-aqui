@@ -5,7 +5,6 @@ export const Container = styled.div`
   justify-content: center;
   max-width: 1440px;
   width: 100%;
-
   margin: 2vw auto;
   padding: 0 8rem;
   gap: 1rem;
@@ -17,10 +16,22 @@ export const Container = styled.div`
 
   @media (max-width: 1000px) {
     flex-direction: column;
-    align-items: center;
-    img {
-      width: 400px;
-      height: 400px;
+
+    figure {
+      justify-content: center;
+      display: flex;
     }
+    img {
+      width: 300px;
+      height: 300px;
+      max-width: 300%;
+      max-height: 100%;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    width: 100%;
+    margin: 5vw auto;
+    padding: 0 5rem;
   }
 `;
