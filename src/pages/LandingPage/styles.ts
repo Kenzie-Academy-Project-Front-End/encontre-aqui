@@ -15,6 +15,12 @@ export const StyledLandingPage = styled.div`
     min-width: 50%;
     margin-top: 1rem;
     gap: 1.5rem;
+
+    & > button {
+      font-size: 1.563rem;
+      width: 170px;
+      height: 54px;
+    }
   }
 
   @media (max-width: 600px) {

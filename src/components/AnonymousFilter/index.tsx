@@ -1,17 +1,33 @@
+import { useContext } from 'react';
+import { ItemContext } from '../../contexts/ItemContext';
 import { ThemeButton } from '../../styles/buttons';
 import { StyledAnonymousFilter } from './styles';
 
 function AnonymousFilter() {
+  const { setFilter } = useContext(ItemContext);
+
   return (
     <StyledAnonymousFilter>
       <div className='div-filter-buttons'>
-        <ThemeButton size='medium' buttonColor='orange'>
+        <ThemeButton
+          size='medium'
+          buttonColor='orange'
+          onClick={() => setFilter('found')}
+        >
           Achados
         </ThemeButton>
-        <ThemeButton size='medium' buttonColor='orange'>
+        <ThemeButton
+          size='medium'
+          buttonColor='orange'
+          onClick={() => setFilter('lost')}
+        >
           Perdidos
         </ThemeButton>
-        <ThemeButton size='medium' buttonColor='orange'>
+        <ThemeButton
+          size='medium'
+          buttonColor='orange'
+          onClick={() => setFilter('all')}
+        >
           Todos
         </ThemeButton>
       </div>
