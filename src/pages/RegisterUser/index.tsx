@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Container } from '../../components/Container';
 import { UserContext, IRegisterUser } from '../../contexts/UserContext';
@@ -19,6 +20,7 @@ import imageBackground from '../../assets/img/imagem_register.svg';
 
 export const RegisterUser = () => {
   const { registerUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -95,7 +97,12 @@ export const RegisterUser = () => {
 
             <ThemeTextForm>Já possui conta?</ThemeTextForm>
 
-            <ThemeButton size='large' buttonColor='orange' type='button'>
+            <ThemeButton
+              size='large'
+              buttonColor='orange'
+              type='button'
+              onClick={() => navigate('/login')}
+            >
               Login
             </ThemeButton>
           </div>
