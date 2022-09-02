@@ -30,6 +30,16 @@ export const ThemeTitle = styled(BaseTitle)<IThemeTitleProps>`
           font-size: 14px;
           line-height: 24px;
         `;
+      case 'title5':
+        return css`
+          font-size: 65px;
+          line-height: 77px;
+        `;
+      case 'title6':
+        return css`
+          font-size: 25px;
+          line-height: 30px;
+        `;
       default:
         return false;
     }
@@ -50,4 +60,3 @@ export const ThemeTitle = styled(BaseTitle)<IThemeTitleProps>`
     }
   }}
 `;
-
