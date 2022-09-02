@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { Container } from '../../components/Container';
+import { Container } from '../../components/LandingPage';
 import { ThemeButton } from '../../styles/buttons';
-import robo from '../../assets/img/landingPage.svg';
 import { ThemeTitle } from '../../styles/typography';
 import { StyledLandingPage } from './styles';
+import robo from '../../assets/img/landingPage.svg';
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -25,6 +25,7 @@ export const LandingPage = () => {
 
         <div className='buttons'>
           <ThemeButton
+            className='button'
             type='button'
             size='medium'
             buttonColor='orange'
@@ -33,6 +34,7 @@ export const LandingPage = () => {
             Login
           </ThemeButton>
           <ThemeButton
+            className='button'
             type='button'
             size='medium'
             buttonColor='orange'

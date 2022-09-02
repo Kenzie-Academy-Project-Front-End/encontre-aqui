@@ -21,7 +21,10 @@ export const ThemeButton = styled.button<IThemeButtonProps>`
         `;
       case 'medium':
         return css`
-          padding: 5px 10px;
+          font-size: 1.563rem;
+          width: 170px;
+          height: 54px;
+          padding: 2px 5px;
         `;
       case 'large':
         return css`
