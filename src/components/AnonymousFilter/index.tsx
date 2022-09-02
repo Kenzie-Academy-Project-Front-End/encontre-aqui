@@ -32,9 +32,17 @@ function AnonymousFilter() {
         </ThemeButton>
       </div>
       <div className='div-filter-search'>
-        <input type='text' placeholder='Pesquisar Item' />
-        <ThemeButton size='medium' buttonColor='orange'>
-          Buscar
+        <input
+          type='text'
+          placeholder='Pesquisar Item'
+          onChange={(e) => setFilter(e.target.value)}
+        />
+        <ThemeButton
+          size='medium'
+          buttonColor='orange'
+          onClick={() => setFilter('')}
+        >
+          Limpar
         </ThemeButton>
       </div>
     </StyledAnonymousFilter>

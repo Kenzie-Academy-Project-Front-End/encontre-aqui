@@ -35,13 +35,37 @@ export function ItemProvider({ children }: IItemProviderProps) {
   const [filter, setFilter] = useState<string>('all');
 
   useEffect(() => {
-    if (filter === 'all') {
+    if (filter === 'all' || filter === '') {
       api.get<IItem[]>('/itens').then((res) => {
         setItens(res.data);
       });
-    } else {
+    }
+    if (filter === 'found' || filter === 'lost') {
       api.get<IItem[]>(`/itens?status=${filter}`).then((res) => {
         setItens(res.data);
+      });
+    }
+    if (
+      filter !== 'all' &&
+      filter !== 'found' &&
+      filter !== 'lost' &&
+      filter !== ''
+    ) {
+      api.get<IItem[]>('/itens').then((res) => {
+        const search = res.data.filter(
+          (item) =>
+            item.name
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .toLowerCase()
+              .includes(
+                filter
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .toLowerCase()
+              ) && item
+        );
+        setItens(search);
       });
     }
   }, [filter]);
