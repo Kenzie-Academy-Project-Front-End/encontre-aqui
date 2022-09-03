@@ -6,18 +6,22 @@ import { StyledAnonymousHeader } from './styles';
 function AnonymousHeader() {
   const navigate = useNavigate();
 
-  function pageDirection() {
+  function pageDirectionRegister() {
     navigate('/register', { replace: true });
+  }
+
+  function pageDirectionLogin() {
+    navigate('/login', { replace: true });
   }
 
   return (
     <StyledAnonymousHeader>
       <img src={logo} alt='logomarca Encontre aqui' />
       <div className='nav-bar'>
-        <button type='button' onClick={() => pageDirection()}>
+        <button type='button' onClick={() => pageDirectionRegister()}>
           CADASTRAR
         </button>
-        <button type='button' onClick={() => pageDirection()}>
+        <button type='button' onClick={() => pageDirectionLogin()}>
           LOGIN
         </button>
         <BiUserCircle size={100} />
