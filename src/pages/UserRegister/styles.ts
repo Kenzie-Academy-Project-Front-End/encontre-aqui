@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-export const StyledRegisterUser = styled.div`
+export const StyledUserRegister = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  /* justify-content: center; */
   gap: 1.5rem;
   align-items: center;
+  position: relative;
 
   .logo {
     display: flex;
-    width: 250px;
+    width: 278px;
   }
 
   .title {
@@ -35,10 +35,10 @@ export const StyledRegisterUser = styled.div`
 
   @media (min-width: 1280px) {
     .imageBackground {
-      position: fixed;
+      position: absolute;
       right: 0;
       bottom: 0;
-      z-index: -1;
+      z-index: -2;
     }
   }
 `;
