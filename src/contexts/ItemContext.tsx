@@ -25,9 +25,14 @@ interface IItem {
 interface IItemContext {
   itens: IItem[];
   inputValue: string;
+  counter: number;
+  historicCounter: number;
   errorClaim: () => void;
   setFilter: Dispatch<SetStateAction<string>>;
   setInputValue: Dispatch<SetStateAction<string>>;
+  paginateRigth: () => void;
+  paginateLeft: () => void;
+  setCounter: Dispatch<SetStateAction<number>>;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -36,6 +41,8 @@ export function ItemProvider({ children }: IItemProviderProps) {
   const [itens, setItens] = useState<IItem[]>([]);
   const [filter, setFilter] = useState<string>('all');
   const [inputValue, setInputValue] = useState<string>('');
+  const [counter, setCounter] = useState<number>(0);
+  const [historicCounter, setHistoricCounter] = useState<number>(0);
 
   useEffect(() => {
     if (filter === 'all' || filter === '') {
@@ -69,9 +76,10 @@ export function ItemProvider({ children }: IItemProviderProps) {
               ) && item
         );
         setItens(search);
+        setCounter(0);
       });
     }
-  }, [filter, inputValue]);
+  }, [filter, inputValue, counter]);
 
   function errorClaim() {
     toast.warn('Faça login ou cadastre-se para reivindicar um item', {
@@ -81,9 +89,34 @@ export function ItemProvider({ children }: IItemProviderProps) {
     });
   }
 
+  function paginateRigth() {
+    if (counter + 6 < itens.length) {
+      setCounter(counter + 6);
+      setHistoricCounter(counter + 6);
+    }
+  }
+
+  function paginateLeft() {
+    if (counter > 0) {
+      setCounter(counter - 6);
+      setHistoricCounter(counter - 6);
+    }
+  }
+
   return (
     <ItemContext.Provider
-      value={{ itens, errorClaim, setFilter, inputValue, setInputValue }}
+      value={{
+        itens,
+        errorClaim,
+        setFilter,
+        inputValue,
+        setInputValue,
+        paginateRigth,
+        paginateLeft,
+        counter,
+        historicCounter,
+        setCounter,
+      }}
     >
       {children}
       <ToastContainer

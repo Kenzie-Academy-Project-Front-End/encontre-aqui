@@ -4,7 +4,8 @@ import { ThemeButton } from '../../styles/buttons';
 import { StyledAnonymousFilter } from './styles';
 
 function AnonymousFilter() {
-  const { setFilter, inputValue, setInputValue } = useContext(ItemContext);
+  const { setFilter, inputValue, setInputValue, historicCounter, setCounter } =
+    useContext(ItemContext);
 
   return (
     <StyledAnonymousFilter>
@@ -47,6 +48,7 @@ function AnonymousFilter() {
           onClick={() => {
             setInputValue('');
             setFilter('');
+            setCounter(historicCounter);
           }}
         >
           Limpar
