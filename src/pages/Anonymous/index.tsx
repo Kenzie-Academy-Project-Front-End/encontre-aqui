@@ -1,11 +1,14 @@
 import AnonymousHeader from '../../components/AnonymousHeader';
 import AnonymousMain from '../../components/AnonymousMain';
+import { Container } from '../../components/Container';
 
 function AnonymousNavigate() {
   return (
     <>
       <AnonymousHeader />
-      <AnonymousMain />
+      <Container>
+        <AnonymousMain />
+      </Container>
     </>
   );
 }
