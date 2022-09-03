@@ -10,7 +10,7 @@ export const CardContainer = styled.li`
   border: 5px solid var(--color-orange);
   background-color: var(--color-white);
   position: relative;
-  animation: scale-in 1.5s;
+  animation: scale-in 1s;
 
   @keyframes scale-in {
     0% {
@@ -25,6 +25,11 @@ export const CardContainer = styled.li`
     width: 13.438rem;
     height: 16.625rem;
     border-radius: 10px;
+    transition: all 0.3s;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
   }
 
   div {

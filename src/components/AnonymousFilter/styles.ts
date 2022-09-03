@@ -6,6 +6,7 @@ export const StyledAnonymousFilter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 
   .div-filter-buttons {
     width: 50%;
