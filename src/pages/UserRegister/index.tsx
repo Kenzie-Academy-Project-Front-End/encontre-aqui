@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Container } from '../../components/Container';
 import { UserContext, IRegisterUser } from '../../contexts/UserContext';
-import { schema } from '../../validators/registerUser';
-import { StyledRegisterUser } from './styles';
+import { schema } from '../../validators/userRegister';
+import { StyledUserRegister } from './styles';
 import { ThemeTitle } from '../../styles/typography';
 import {
   Form,
@@ -16,9 +16,9 @@ import {
 } from '../../components/Form';
 import { ThemeButton } from '../../styles/buttons';
 import Logo from '../../assets/img/logo.svg';
-import imageBackground from '../../assets/img/imagem_register.svg';
+import imgRegister from '../../assets/img/imgRegister.svg';
 
-export const RegisterUser = () => {
+export const UserRegister = () => {
   const { registerUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export const RegisterUser = () => {
 
   return (
     <Container>
-      <StyledRegisterUser>
+      <StyledUserRegister>
         <figure className='logo'>
           <img src={Logo} alt='logo' />
         </figure>
@@ -42,7 +42,7 @@ export const RegisterUser = () => {
             </ThemeTitle>
           </div>
 
-          <ThemeLabel htmlFor='email'>Email:</ThemeLabel>
+          <ThemeLabel htmlFor='email'>Email *</ThemeLabel>
           <ThemeInput
             type='text'
             id='email'
@@ -52,7 +52,7 @@ export const RegisterUser = () => {
           />
           <ThemeErrorForm>{errors.email?.message}</ThemeErrorForm>
 
-          <ThemeLabel htmlFor='password'>Senha:</ThemeLabel>
+          <ThemeLabel htmlFor='password'>Senha *</ThemeLabel>
           <ThemeInput
             type='password'
             id='password'
@@ -62,7 +62,7 @@ export const RegisterUser = () => {
           />
           <ThemeErrorForm>{errors.password?.message}</ThemeErrorForm>
 
-          <ThemeLabel htmlFor='phone'>Telefone:</ThemeLabel>
+          <ThemeLabel htmlFor='phone'>Telefone *</ThemeLabel>
           <ThemeInput
             type='text'
             id='phone'
@@ -72,7 +72,7 @@ export const RegisterUser = () => {
           />
           <ThemeErrorForm>{errors.phone?.message}</ThemeErrorForm>
 
-          <ThemeLabel htmlFor='avatar'>URL Avatar:</ThemeLabel>
+          <ThemeLabel htmlFor='avatar'>URL Avatar</ThemeLabel>
           <ThemeInput
             type='text'
             id='avatar'
@@ -81,7 +81,7 @@ export const RegisterUser = () => {
             borderColor='success'
           />
 
-          <ThemeLabel htmlFor='social_network'>Rede Social:</ThemeLabel>
+          <ThemeLabel htmlFor='social_network'>Rede Social</ThemeLabel>
           <ThemeInput
             type='text'
             id='social_network'
@@ -108,11 +108,11 @@ export const RegisterUser = () => {
           </div>
           <img
             className='imageBackground'
-            src={imageBackground}
+            src={imgRegister}
             alt='imageBackground'
           />
         </Form>
-      </StyledRegisterUser>
+      </StyledUserRegister>
     </Container>
   );
 };
