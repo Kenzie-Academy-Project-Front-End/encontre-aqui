@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { StyledHeaderUser } from './styles';
 import logo from '../../assets/img/logo.svg';
-import { ThemeButton } from '../../styles/buttons';
 import { UserContext } from '../../contexts/UserContext';
 
 function HeaderUser() {
@@ -13,15 +12,11 @@ function HeaderUser() {
 
   return (
     <StyledHeaderUser>
-      <div className='div-content'>
-        <img src={logo} alt='logomarca Encontre aqui' />
-        <ThemeButton size='medium' buttonColor='orange'>
-          Cadastrar Item
-        </ThemeButton>
-      </div>
+      <img className='logo' src={logo} alt='logomarca Encontre aqui' />
       <div>
         <img className='user-avatar' src={user.avatar} alt='avatar o usuário' />
         <div>
+          <button type='button'>Cadastrar item</button>
           <button type='button'>Histórico</button>
           <button
             type='button'

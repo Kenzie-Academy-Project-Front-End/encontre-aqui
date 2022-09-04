@@ -10,23 +10,6 @@ export const StyledHeaderUser = styled.div`
   background: var(--color-dark-blue-2);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-  .div-content {
-    width: 70%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10rem;
-
-    button {
-      font-size: 1.25rem;
-      border: none;
-      background-color: var(--color-orange);
-      color: var(--color-white);
-      cursor: pointer;
-    }
-  }
-
   div {
     width: 100px;
     height: 100px;
@@ -46,7 +29,7 @@ export const StyledHeaderUser = styled.div`
 
     div {
       width: 10rem;
-      height: 10rem;
+      height: 15rem;
       display: none;
       position: absolute;
       right: 50px;
@@ -74,19 +57,10 @@ export const StyledHeaderUser = styled.div`
   }
 
   @media (max-width: 890px) {
-    height: 15rem;
-    flex-direction: column-reverse;
     justify-content: center;
 
-    .div-content {
-      height: 40%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        display: none;
-      }
+    .logo {
+      display: none;
     }
 
     div {
