@@ -29,7 +29,7 @@ export const LandingPage = () => {
             type='button'
             size='medium'
             buttonColor='orange'
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/login', { replace: true })}
           >
             Login
           </ThemeButton>
@@ -38,7 +38,7 @@ export const LandingPage = () => {
             type='button'
             size='medium'
             buttonColor='orange'
-            onClick={() => navigate('/anonymous')}
+            onClick={() => navigate('/anonymous', { replace: true })}
           >
             Ver Itens
           </ThemeButton>
