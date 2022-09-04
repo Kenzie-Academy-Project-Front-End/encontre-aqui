@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledAnonymousMain = styled.div`
   width: 100%;
   height: 80vh;
-  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 `;
