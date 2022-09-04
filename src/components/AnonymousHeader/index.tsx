@@ -7,8 +7,12 @@ import { Container } from '../Container';
 function AnonymousHeader() {
   const navigate = useNavigate();
 
-  function pageDirection() {
+  function pageDirectionRegister() {
     navigate('/register', { replace: true });
+  }
+
+  function pageDirectionLogin() {
+    navigate('/login', { replace: true });
   }
 
   return (
