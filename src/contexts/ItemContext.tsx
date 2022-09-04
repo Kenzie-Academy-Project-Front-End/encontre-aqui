@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { api } from '../services/api';
 
 interface IItemProviderProps {
@@ -119,11 +119,6 @@ export function ItemProvider({ children }: IItemProviderProps) {
       }}
     >
       {children}
-      <ToastContainer
-        pauseOnHover={false}
-        draggable={false}
-        closeButton={false}
-      />
     </ItemContext.Provider>
   );
 }
