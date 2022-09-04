@@ -4,7 +4,8 @@ import logo from '../../assets/img/logo.svg';
 import { UserContext } from '../../contexts/UserContext';
 
 function HeaderUser() {
-  const { userInfo, user, logout } = useContext(UserContext);
+  const { userInfo, user, logout, history, setHistory } =
+    useContext(UserContext);
 
   useEffect(() => {
     userInfo();
@@ -17,7 +18,15 @@ function HeaderUser() {
         <img className='user-avatar' src={user.avatar} alt='avatar o usuário' />
         <div>
           <button type='button'>Cadastrar item</button>
-          <button type='button'>Histórico</button>
+          {history ? (
+            <button type='button' onClick={() => setHistory(false)}>
+              Vitrine
+            </button>
+          ) : (
+            <button type='button' onClick={() => setHistory(true)}>
+              Histórico
+            </button>
+          )}
           <button
             type='button'
             onClick={(e) => {
