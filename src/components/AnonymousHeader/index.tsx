@@ -20,10 +20,10 @@ function AnonymousHeader() {
       <Container>
         <img src={logo} alt='logomarca Encontre aqui' />
         <div className='nav-bar'>
-          <button type='button' onClick={() => pageDirection()}>
+          <button type='button' onClick={() => pageDirectionRegister()}>
             CADASTRAR
           </button>
-          <button type='button' onClick={() => pageDirection()}>
+          <button type='button' onClick={() => pageDirectionLogin()}>
             LOGIN
           </button>
           <BiUserCircle size={100} />

@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
 export const StyledHeaderUser = styled.div`
-  width: 100%;
-  height: 8.625rem;
   display: flex;
-  padding: 0 2rem;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
   background: var(--color-dark-blue-2);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  & > div {
+    height: 8.625rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
 
-  div {
+  .header {
     width: 100px;
     height: 100px;
     position: relative;
@@ -50,22 +52,8 @@ export const StyledHeaderUser = styled.div`
         transition: 0.5s;
 
         :hover {
-          background-color: #ff8c00;
+          background-color: var(--color-orange-1);
         }
-      }
-    }
-  }
-
-  @media (max-width: 890px) {
-    justify-content: center;
-
-    .logo {
-      display: none;
-    }
-
-    div {
-      div {
-        right: -25px;
       }
     }
   }

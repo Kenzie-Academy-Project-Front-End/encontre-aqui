@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Container } from '../../components/Container';
 import HeaderUser from '../../components/HeaderUser';
 import MainUser from '../../components/MainUser';
 import { UserContext } from '../../contexts/UserContext';
@@ -11,7 +12,9 @@ function UserNavigate() {
     return (
       <>
         <HeaderUser />
-        <MainUser />
+        <Container>
+          <MainUser />
+        </Container>
       </>
     );
   }
