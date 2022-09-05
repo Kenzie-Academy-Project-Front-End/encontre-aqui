@@ -1,14 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { UserContext } from '../../contexts/UserContext';
 import { StyledHistoryClaim } from './styles';
 
 function HistoryClaim() {
-  const { claim, listUserClaim } = useContext(UserContext);
-
-  useEffect(() => {
-    listUserClaim();
-  }, []);
+  const { claim } = useContext(UserContext);
 
   return (
     <>

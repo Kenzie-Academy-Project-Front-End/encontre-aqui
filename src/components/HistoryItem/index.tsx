@@ -1,14 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { UserContext } from '../../contexts/UserContext';
 import { StyledHistoryItem } from './styles';
 
 function HistoryItem() {
-  const { itens, listUserItens } = useContext(UserContext);
-
-  useEffect(() => {
-    listUserItens();
-  }, []);
+  const { itens } = useContext(UserContext);
 
   return (
     <>
