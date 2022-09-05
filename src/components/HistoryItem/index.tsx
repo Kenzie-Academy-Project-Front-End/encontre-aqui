@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { UserContext } from '../../contexts/UserContext';
-import { ThemeTitle } from '../../styles/typography';
 import { StyledHistoryItem } from './styles';
 
 function HistoryItem() {
@@ -26,14 +25,6 @@ function HistoryItem() {
             <div>
               <img src={item.image} alt={item.name} />
               <div className='div-description'>
-                <ThemeTitle
-                  className=''
-                  tag='h2'
-                  titleSize='title2'
-                  color='black'
-                >
-                  {item.name}
-                </ThemeTitle>
                 <p>
                   <span>Descrição: </span>
                   {item.description}
