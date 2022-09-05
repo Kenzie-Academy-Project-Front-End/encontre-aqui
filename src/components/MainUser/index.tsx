@@ -10,7 +10,7 @@ function MainUser() {
   const { history } = useContext(UserContext);
   return (
     <StyledMainUser>
-      <AnonymousFilter />
+      {history ? null : <AnonymousFilter />}
       {history ? (
         <HistoryUser />
       ) : (

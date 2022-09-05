@@ -4,6 +4,7 @@ export const StyledHistory = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 5rem;
 
   @media (max-width: 1100px) {
     flex-direction: column;
