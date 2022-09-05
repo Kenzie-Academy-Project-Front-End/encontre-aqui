@@ -3,6 +3,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useEffect,
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -79,18 +80,15 @@ interface IClaim {
 interface IUserContext {
   registerUser: (data: IRegisterUser) => void;
   userLogin: (data: ILogin) => void;
-  listUserItens: () => void;
   itens: Itens[];
   showPassword: () => void;
   type: string;
   icon: boolean;
-  userInfo: () => void;
   user: IUserResponse;
   logout: () => void;
   redirectLadingPage: () => void;
   history: boolean;
   setHistory: Dispatch<SetStateAction<boolean>>;
-  listUserClaim: () => void;
   claim: IClaim[];
 }
 
@@ -129,29 +127,35 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       .catch(() => toast.error('Email ou senha inválidos'));
   }
 
-  function listUserItens() {
+  useEffect(() => {
     const userID = window.localStorage.getItem('userID');
 
-    api.get(`/users/${userID}?_embed=itens`).then((response) => {
-      setItens(response.data.itens);
-    });
-  }
+    if (userID) {
+      api.get(`/users/${userID}?_embed=itens`).then((response) => {
+        setItens(response.data.itens);
+      });
+    }
+  }, []);
 
-  function listUserClaim() {
+  useEffect(() => {
     const userID = window.localStorage.getItem('userID');
 
-    api.get(`/users/${userID}?_embed=claim`).then((response) => {
-      setClaim(response.data.claim);
-    });
-  }
+    if (userID) {
+      api.get(`/users/${userID}?_embed=claim`).then((response) => {
+        setClaim(response.data.claim);
+      });
+    }
+  }, []);
 
-  function userInfo() {
+  useEffect(() => {
     const userID = window.localStorage.getItem('userID');
 
-    api.get(`/users/${userID}`).then((res) => {
-      setUser(res.data);
-    });
-  }
+    if (userID) {
+      api.get(`/users/${userID}`).then((res) => {
+        setUser(res.data);
+      });
+    }
+  }, []);
 
   function showPassword() {
     if (type === 'password') {
@@ -187,19 +191,16 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       value={{
         registerUser,
         userLogin,
-        listUserItens,
         itens,
         showPassword,
         type,
         icon,
-        userInfo,
         user,
         logout,
         redirectLadingPage,
         history,
         setHistory,
         claim,
-        listUserClaim,
       }}
     >
       {children}
