@@ -95,6 +95,7 @@ interface IUserContext {
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
+  const [control, setControl] = useState<boolean>(false);
   const [itens, setItens] = useState<Itens[]>([]);
   const [claim, setClaim] = useState<IClaim[]>([]);
   const [type, setType] = useState<string>('password');
@@ -123,6 +124,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         window.localStorage.setItem('token', response.data.accessToken);
         toast.success('Bem vindo (a)!');
         navigate('/user', { replace: true });
+        setControl(!control);
       })
       .catch(() => toast.error('Email ou senha inválidos'));
   }
@@ -134,7 +136,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     } else {
       navigate('/', { replace: true });
     }
-  }, []);
+  }, [control]);
 
   useEffect(() => {
     const userID = window.localStorage.getItem('userID');
@@ -144,7 +146,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setItens(response.data.itens);
       });
     }
-  }, []);
+  }, [control]);
 
   useEffect(() => {
     const userID = window.localStorage.getItem('userID');
@@ -154,7 +156,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setClaim(response.data.claim);
       });
     }
-  }, []);
+  }, [control]);
 
   useEffect(() => {
     const userID = window.localStorage.getItem('userID');
@@ -164,7 +166,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setUser(res.data);
       });
     }
-  }, []);
+  }, [control]);
 
   function showPassword() {
     if (type === 'password') {
