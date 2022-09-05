@@ -12,13 +12,13 @@ function MainUser() {
     <StyledMainUser>
       <AnonymousFilter />
       {history ? (
-        <HistoryUser/>
+        <HistoryUser />
       ) : (
         <CardListUser>
           <CardUser />
         </CardListUser>
       )}
-      <ButtonsNavigate />
+      {history ? null : <ButtonsNavigate />}
     </StyledMainUser>
   );
 }
