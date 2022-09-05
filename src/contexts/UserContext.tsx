@@ -1,10 +1,4 @@
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
@@ -70,8 +64,6 @@ interface IUserContext {
   user: IUserResponse;
   logout: () => void;
   redirectLadingPage: () => void;
-  history: boolean;
-  setHistory: Dispatch<SetStateAction<boolean>>;
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -81,7 +73,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [type, setType] = useState<string>('password');
   const [icon, setIcon] = useState<boolean>(true);
   const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
-  const [history, setHistory] = useState<boolean>(false);
   const navigate = useNavigate();
 
   function registerUser(data: IRegisterUser) {
@@ -167,8 +158,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         user,
         logout,
         redirectLadingPage,
-        history,
-        setHistory,
       }}
     >
       {children}
