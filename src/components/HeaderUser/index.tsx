@@ -16,7 +16,7 @@ function HeaderUser() {
     <StyledHeaderUser>
       <Container>
         <img className='logo' src={logo} alt='logomarca Encontre aqui' />
-        <div>
+        <div className='header__user'>
           <img className='user-avatar' src={user.avatar} alt='avatar o usuário' />
           <div>
             <button type='button'>Cadastrar item</button>

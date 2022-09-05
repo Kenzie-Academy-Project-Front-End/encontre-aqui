@@ -5,6 +5,7 @@ import { ThemeTitle } from '../../styles/typography';
 import { StyledHistoryItem } from './styles';
 
 function HistoryItem() {
+  
   const { itens, listUserItens } = useContext(UserContext);
 
   useEffect(() => {

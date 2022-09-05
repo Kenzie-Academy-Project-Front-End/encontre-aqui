@@ -12,7 +12,7 @@ export const StyledHeaderUser = styled.div`
     flex-direction: row;
   }
 
-  .header {
+  .header__user {
     width: 100px;
     height: 100px;
     position: relative;
