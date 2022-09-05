@@ -1,3 +1,4 @@
+import HistoryClaim from '../HistoryClaim';
 import HistoryItem from '../HistoryItem';
 import { StyledClaim, StyledHistory, StyledItem } from './style';
 
@@ -5,11 +6,12 @@ function HistoryUser() {
   return (
     <StyledHistory>
       <StyledItem>
-        <h2>Itens cadastrados</h2>
+        <h2>Cadastrados</h2>
         <HistoryItem />
       </StyledItem>
       <StyledClaim>
-        <h2>Itens Reivindicados</h2>
+        <h2>Reivindicados</h2>
+        <HistoryClaim />
       </StyledClaim>
     </StyledHistory>
   );
