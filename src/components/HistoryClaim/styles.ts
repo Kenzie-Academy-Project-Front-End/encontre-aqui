@@ -65,7 +65,7 @@ export const StyledHistoryClaim = styled.li`
         justify-content: center;
         align-items: center;
         border: 2px solid var(--color-white);
-        gap: 7%;
+        gap: 1rem;
 
         p {
           width: 100%;
