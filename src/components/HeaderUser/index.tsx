@@ -16,8 +16,12 @@ function HeaderUser() {
     <StyledHeaderUser>
       <Container>
         <img className='logo' src={logo} alt='logomarca Encontre aqui' />
-        <div>
-          <img className='user-avatar' src={user.avatar} alt='avatar o usuário' />
+        <div className='header__user'>
+          <img
+            className='user-avatar'
+            src={user.avatar}
+            alt='avatar o usuário'
+          />
           <div>
             <button type='button'>Cadastrar item</button>
             {history ? (
@@ -38,8 +42,8 @@ function HeaderUser() {
             >
               Sair
             </button>
-            </div>
           </div>
+        </div>
       </Container>
     </StyledHeaderUser>
   );
