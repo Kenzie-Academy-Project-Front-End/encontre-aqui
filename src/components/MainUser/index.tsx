@@ -12,7 +12,7 @@ function MainUser() {
     <StyledMainUser>
       <AnonymousFilter />
       {history ? (
-        <HistoryUser />
+        <HistoryUser/>
       ) : (
         <CardListUser>
           <CardUser />
