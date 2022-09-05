@@ -32,7 +32,7 @@ export const UserRegister = () => {
     <Container>
       <StyledUserRegister>
         <figure className='logo'>
-          <img src={Logo} alt='logo' />
+          <img src={Logo} alt='Logo Encontre Aqui' />
         </figure>
 
         <Form onSubmit={handleSubmit(registerUser)}>
@@ -106,11 +106,8 @@ export const UserRegister = () => {
               Login
             </ThemeButton>
           </div>
-          <img
-            className='imageBackground'
-            src={imgRegister}
-            alt='imageBackground'
-          />
+
+          <img className='userIlustration' src={imgRegister} alt='ilustração' />
         </Form>
       </StyledUserRegister>
     </Container>

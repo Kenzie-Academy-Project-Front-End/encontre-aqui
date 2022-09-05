@@ -1,32 +1,24 @@
 import styled from 'styled-components';
 
-export const ImgLogo = styled.div`
-  display: flex;
-  width: 250px;
-  align-self: center;
-  margin-top: 62px;
-`;
-
 export const StyledUserLogin = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
-  justify-content: center;
+  gap: 1.5rem;
+  align-items: center;
+  position: relative;
 
-  height: 600px;
-
-  form {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    margin-top: 40px;
+  .logo {
+    display: flex;
+    width: 278px;
   }
 
-  #formTitle {
-    height: 89px;
-    font-size: 40px;
-    line-height: 48px;
-
-    text-align: center;
-    align-self: center;
+  .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
   }
 
   .divPassword {
@@ -48,16 +40,16 @@ export const StyledUserLogin = styled.div`
     background: transparent;
   }
 
-  #registerField {
+  .buttons {
     display: flex;
+    min-width: 100%;
     flex-direction: column;
-    align-self: center;
-    padding-top: 3.25rem;
-    gap: 10px;
-
-    font-size: 20px;
-    line-height: 24px;
     text-align: center;
+    margin-top: 1rem;
+    gap: 16px;
+    & > p {
+      margin-top: 30px;
+    }
   }
 
   #btn_register {
@@ -101,9 +93,6 @@ export const StyledUserLogin = styled.div`
   }
 
   @media screen and (max-width: 1160px) {
-    height: unset;
-    padding-top: 50px;
-
     form {
       padding-bottom: unset;
     }

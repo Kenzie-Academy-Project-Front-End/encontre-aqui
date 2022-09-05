@@ -105,14 +105,15 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const navigate = useNavigate();
 
   function registerUser(data: IRegisterUser) {
-    const responseRegister = api
+    api
       .post<IRegisterUserResponse>('/register', data)
-      .then((response) => response);
-    toast.promise(responseRegister, {
-      pending: 'Cadastrando...',
-      success: 'Cadastro realizado com sucesso!',
-      error: 'Erro ao realizar cadastro!',
-    });
+      .then(() => {
+        toast.success('Cadastro realizado com sucesso!');
+        navigate('/login', { replace: true });
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data);
+      });
   }
 
   function userLogin(data: ILogin) {
@@ -126,7 +127,9 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         navigate('/user', { replace: true });
         setControl(!control);
       })
-      .catch(() => toast.error('Email ou senha inválidos'));
+      .catch((err) => {
+        toast.error(err?.response?.data);
+      });
   }
 
   useEffect(() => {

@@ -14,12 +14,12 @@ import {
   ThemeLabel,
 } from '../../components/Form';
 import { Container } from '../../components/Container';
-import { ImgLogo, StyledUserLogin } from './styles';
+import { StyledUserLogin } from './styles';
 import { ThemeButton } from '../../styles/buttons';
+import { ThemeTitle } from '../../styles/typography';
 
 export function UserLogin() {
-  const { userLogin } = useContext(UserContext);
-  const { showPassword, type, icon } = useContext(UserContext);
+  const { userLogin, showPassword, type, icon } = useContext(UserContext);
   const navigate = useNavigate();
 
   const {
@@ -31,11 +31,16 @@ export function UserLogin() {
   return (
     <Container>
       <StyledUserLogin>
-        <ImgLogo>
+        <figure className='logo'>
           <img src={Logo} alt='Logo Encontre Aqui' />
-        </ImgLogo>
+        </figure>
+
         <Form onSubmit={handleSubmit(userLogin)}>
-          <p id='formTitle'>Login</p>
+          <div className='title'>
+            <ThemeTitle className='' tag='h2' titleSize='title2' color='black'>
+              Login
+            </ThemeTitle>
+          </div>
 
           <ThemeLabel htmlFor='email'>Email</ThemeLabel>
           <ThemeInput
@@ -58,13 +63,12 @@ export function UserLogin() {
               {icon === true ? <FaEyeSlash size={21} /> : <FaEye size={21} />}
             </button>
           </div>
-
           <ThemeErrorForm>{errors.password?.message}</ThemeErrorForm>
+
           <ThemeButton size='large' buttonColor='orange' type='submit'>
             Entrar
           </ThemeButton>
-
-          <div id='registerField'>
+          <div className='buttons'>
             <p>Ainda não tem uma conta?</p>
             <button
               onClick={() => navigate('/register')}
@@ -74,7 +78,6 @@ export function UserLogin() {
               Cadastre-se
             </button>
           </div>
-
           <img id='loginIlustration' src={imgLogin} alt='ilustração' />
         </Form>
       </StyledUserLogin>

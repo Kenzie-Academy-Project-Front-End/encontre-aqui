@@ -34,7 +34,7 @@ export const StyledUserRegister = styled.div`
   }
 
   @media (min-width: 1280px) {
-    .imageBackground {
+    .userIlustration {
       position: absolute;
       right: 0;
       bottom: 0;
