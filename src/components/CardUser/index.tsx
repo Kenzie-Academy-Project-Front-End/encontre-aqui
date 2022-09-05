@@ -7,13 +7,18 @@ import { StyledCardUser } from './styles';
 
 function CardUser() {
   const { itens, counter } = useContext(ItemContext);
-  const { user } = useContext(UserContext);
+  const { user, claim } = useContext(UserContext);
 
   return (
     <>
       {itens.map((item, index) =>
         index >= counter && index < counter + 6 ? (
-          <StyledCardUser key={item.id} userLog={item.userId} user={user.id}>
+          <StyledCardUser
+            key={item.id}
+            userLog={item.userId}
+            user={user.id}
+            claim={claim[index]?.userId}
+          >
             <img src={item.image} alt='imagem do item' />
             <div>
               <ThemeTitle
