@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface IStyledCardUser {
   user: number;
   userLog: number;
+  claim: number;
 }
 
 export const StyledCardUser = styled.li<IStyledCardUser>`
@@ -16,7 +17,8 @@ export const StyledCardUser = styled.li<IStyledCardUser>`
   position: relative;
   animation: scale-in 1.5s;
   background-color: var(--color-white);
-  opacity: ${({ userLog, user }) => (userLog === user ? 0.5 : 1)};
+  opacity: ${({ userLog, user, claim }) =>
+    userLog === user || user === claim ? 0.5 : 1};
 
   @keyframes scale-in {
     0% {
