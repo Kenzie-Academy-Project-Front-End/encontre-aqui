@@ -67,8 +67,8 @@ export const StyledCardUser = styled.li<IStyledCardUser>`
       width: 15.125rem;
       height: 3.938rem;
       font-size: 1.25rem;
-      cursor: ${({ userLog, user }) =>
-        userLog === user ? 'not-allowed' : 'pointer'};
+      cursor: ${({ userLog, user, claim }) =>
+        userLog === user || user === claim ? 'not-allowed' : 'pointer'};
     }
   }
 
