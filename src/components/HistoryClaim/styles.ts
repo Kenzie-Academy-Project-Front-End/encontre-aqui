@@ -16,6 +16,12 @@ export const StyledHistoryClaim = styled.li`
       align-items: center;
       cursor: pointer;
       margin-bottom: 1rem;
+      gap: 1rem;
+
+      svg {
+        min-width: 30px;
+        min-height: 30px;
+      }
 
       p {
         font-size: 20px;
@@ -25,11 +31,17 @@ export const StyledHistoryClaim = styled.li`
           color: var(--color-orange);
         }
       }
+
+      @media (max-width: 500px) {
+        p {
+          text-align: justify;
+        }
+      }
     }
 
     div {
       width: 100%;
-      height: 15rem;
+      min-height: 10rem;
       border-radius: 1.25rem;
       display: flex;
       align-items: center;
@@ -40,7 +52,7 @@ export const StyledHistoryClaim = styled.li`
 
       img {
         width: 13.438rem;
-        height: 16.625rem;
+        height: 13.438rem;
         border-radius: 18px;
       }
 
@@ -64,6 +76,21 @@ export const StyledHistoryClaim = styled.li`
           span {
             font-weight: bold;
           }
+        }
+      }
+
+      @media (max-width: 500px) {
+        flex-direction: column;
+
+        img {
+          margin-top: 1rem;
+        }
+
+        .div-description {
+          width: 90%;
+          height: 40%;
+          max-height: 40%;
+          gap: 1rem;
         }
       }
     }
