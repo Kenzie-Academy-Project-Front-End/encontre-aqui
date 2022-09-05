@@ -129,6 +129,15 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
   useEffect(() => {
     const userID = window.localStorage.getItem('userID');
+    if (userID) {
+      navigate('/user', { replace: true });
+    } else {
+      navigate('/', { replace: true });
+    }
+  }, []);
+
+  useEffect(() => {
+    const userID = window.localStorage.getItem('userID');
 
     if (userID) {
       api.get(`/users/${userID}?_embed=itens`).then((response) => {
