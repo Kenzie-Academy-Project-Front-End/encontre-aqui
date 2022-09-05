@@ -58,6 +58,24 @@ interface Itens {
   id: number;
 }
 
+interface IClaim {
+  user_required: {
+    email: string;
+    phone: string;
+    social_network: string;
+    item: Itens;
+  };
+  user_applicant: {
+    email: string;
+    phone: string;
+    social_network: string;
+    description: string;
+    image: string;
+  };
+  userId: number;
+  id: number;
+}
+
 interface IUserContext {
   registerUser: (data: IRegisterUser) => void;
   userLogin: (data: ILogin) => void;
@@ -72,12 +90,15 @@ interface IUserContext {
   redirectLadingPage: () => void;
   history: boolean;
   setHistory: Dispatch<SetStateAction<boolean>>;
+  listUserClaim: () => void;
+  claim: IClaim[];
 }
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const [itens, setItens] = useState<Itens[]>([]);
+  const [claim, setClaim] = useState<IClaim[]>([]);
   const [type, setType] = useState<string>('password');
   const [icon, setIcon] = useState<boolean>(true);
   const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
@@ -113,6 +134,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
 
     api.get(`/users/${userID}?_embed=itens`).then((response) => {
       setItens(response.data.itens);
+    });
+  }
+
+  function listUserClaim() {
+    const userID = window.localStorage.getItem('userID');
+
+    api.get(`/users/${userID}?_embed=claim`).then((response) => {
+      setClaim(response.data.claim);
     });
   }
 
@@ -169,6 +198,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         redirectLadingPage,
         history,
         setHistory,
+        claim,
+        listUserClaim,
       }}
     >
       {children}
