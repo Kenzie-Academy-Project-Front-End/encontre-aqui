@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledHistoryItem = styled.li`
+export const StyledHistoryClaim = styled.li`
   width: 100%;
   min-height: 3.125rem;
   border-radius: 10px;
@@ -65,7 +65,7 @@ export const StyledHistoryItem = styled.li`
         justify-content: center;
         align-items: center;
         border: 2px solid var(--color-white);
-        gap: 7%;
+        gap: 1rem;
 
         p {
           width: 100%;
@@ -90,6 +90,7 @@ export const StyledHistoryItem = styled.li`
           width: 90%;
           height: 40%;
           max-height: 40%;
+          gap: 1rem;
         }
       }
     }

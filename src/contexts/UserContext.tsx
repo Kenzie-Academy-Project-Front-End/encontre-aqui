@@ -3,6 +3,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useEffect,
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -58,26 +59,45 @@ interface Itens {
   id: number;
 }
 
+interface IClaim {
+  user_required: {
+    email: string;
+    phone: string;
+    social_network: string;
+    item: Itens;
+  };
+  user_applicant: {
+    email: string;
+    phone: string;
+    social_network: string;
+    description: string;
+    image: string;
+  };
+  userId: number;
+  id: number;
+}
+
 interface IUserContext {
   registerUser: (data: IRegisterUser) => void;
   userLogin: (data: ILogin) => void;
-  listUserItens: () => void;
   itens: Itens[];
   showPassword: () => void;
   type: string;
   icon: boolean;
-  userInfo: () => void;
   user: IUserResponse;
   logout: () => void;
   redirectLadingPage: () => void;
   history: boolean;
   setHistory: Dispatch<SetStateAction<boolean>>;
+  claim: IClaim[];
 }
 
 export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IUserProviderProps) => {
+  const [control, setControl] = useState<boolean>(false);
   const [itens, setItens] = useState<Itens[]>([]);
+  const [claim, setClaim] = useState<IClaim[]>([]);
   const [type, setType] = useState<string>('password');
   const [icon, setIcon] = useState<boolean>(true);
   const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
@@ -104,25 +124,49 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         window.localStorage.setItem('token', response.data.accessToken);
         toast.success('Bem vindo (a)!');
         navigate('/user', { replace: true });
+        setControl(!control);
       })
       .catch(() => toast.error('Email ou senha inválidos'));
   }
 
-  function listUserItens() {
+  useEffect(() => {
+    const userID = window.localStorage.getItem('userID');
+    if (userID) {
+      navigate('/user', { replace: true });
+    } else {
+      navigate('/', { replace: true });
+    }
+  }, [control]);
+
+  useEffect(() => {
     const userID = window.localStorage.getItem('userID');
 
-    api.get(`/users/${userID}?_embed=itens`).then((response) => {
-      setItens(response.data.itens);
-    });
-  }
+    if (userID) {
+      api.get(`/users/${userID}?_embed=itens`).then((response) => {
+        setItens(response.data.itens);
+      });
+    }
+  }, [control]);
 
-  function userInfo() {
+  useEffect(() => {
     const userID = window.localStorage.getItem('userID');
 
-    api.get(`/users/${userID}`).then((res) => {
-      setUser(res.data);
-    });
-  }
+    if (userID) {
+      api.get(`/users/${userID}?_embed=claim`).then((response) => {
+        setClaim(response.data.claim);
+      });
+    }
+  }, [control]);
+
+  useEffect(() => {
+    const userID = window.localStorage.getItem('userID');
+
+    if (userID) {
+      api.get(`/users/${userID}`).then((res) => {
+        setUser(res.data);
+      });
+    }
+  }, [control]);
 
   function showPassword() {
     if (type === 'password') {
@@ -158,17 +202,16 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       value={{
         registerUser,
         userLogin,
-        listUserItens,
         itens,
         showPassword,
         type,
         icon,
-        userInfo,
         user,
         logout,
         redirectLadingPage,
         history,
         setHistory,
+        claim,
       }}
     >
       {children}

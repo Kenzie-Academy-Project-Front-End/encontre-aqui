@@ -10,15 +10,15 @@ function MainUser() {
   const { history } = useContext(UserContext);
   return (
     <StyledMainUser>
-      <AnonymousFilter />
+      {history ? null : <AnonymousFilter />}
       {history ? (
-        <HistoryUser/>
+        <HistoryUser />
       ) : (
         <CardListUser>
           <CardUser />
         </CardListUser>
       )}
-      <ButtonsNavigate />
+      {history ? null : <ButtonsNavigate />}
     </StyledMainUser>
   );
 }
