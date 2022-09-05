@@ -15,7 +15,7 @@ function HeaderUser() {
     <StyledHeaderUser>
       <Container>
         <img className='logo' src={logo} alt='logomarca Encontre aqui' />
-        <div className='header'>
+        <div className='header__user'>
           <img
             className='user-avatar'
             src={user.avatar}
