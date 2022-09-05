@@ -28,13 +28,13 @@ export const StyledHistoryItem = styled.li`
     }
 
     div {
-      width: 80%;
+      width: 100%;
       height: 15rem;
       border-radius: 1.25rem;
       display: flex;
-      justify-content: space-around;
       align-items: center;
       margin: 0 auto;
+      gap: 1rem;
       border: 3px solid var(--color-dark-blue-2);
       background-color: var(--color-white);
 
@@ -45,7 +45,7 @@ export const StyledHistoryItem = styled.li`
       }
 
       .div-description {
-        width: 60%;
+        width: 50%;
         height: 85%;
         max-height: 85%;
         display: flex;
@@ -54,13 +54,6 @@ export const StyledHistoryItem = styled.li`
         align-items: center;
         border: 2px solid var(--color-white);
         gap: 7%;
-
-        h2 {
-          text-align: center;
-          line-height: 2rem;
-          font-size: 20px;
-          font-weight: bold;
-        }
 
         p {
           width: 100%;
