@@ -5,8 +5,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { Container } from '../Container';
 
 function HeaderUser() {
-  const { userInfo, user, logout, history, setHistory } =
-    useContext(UserContext);
+  const { userInfo, user, logout } = useContext(UserContext);
 
   useEffect(() => {
     userInfo();
@@ -24,15 +23,7 @@ function HeaderUser() {
           />
           <div>
             <button type='button'>Cadastrar item</button>
-            {history ? (
-              <button type='button' onClick={() => setHistory(false)}>
-                Vitrine
-              </button>
-            ) : (
-              <button type='button' onClick={() => setHistory(true)}>
-                Histórico
-              </button>
-            )}
+            <button type='button'>Histórico</button>
             <button
               type='button'
               onClick={(e) => {
