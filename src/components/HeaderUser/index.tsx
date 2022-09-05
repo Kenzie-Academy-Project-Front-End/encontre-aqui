@@ -5,7 +5,8 @@ import { UserContext } from '../../contexts/UserContext';
 import { Container } from '../Container';
 
 function HeaderUser() {
-  const { userInfo, user, logout } = useContext(UserContext);
+  const { userInfo, user, logout, history, setHistory } =
+    useContext(UserContext);
 
   useEffect(() => {
     userInfo();
@@ -16,14 +17,18 @@ function HeaderUser() {
       <Container>
         <img className='logo' src={logo} alt='logomarca Encontre aqui' />
         <div className='header__user'>
-          <img
-            className='user-avatar'
-            src={user.avatar}
-            alt='avatar o usuário'
-          />
+          <img className='user-avatar' src={user.avatar} alt='avatar o usuário' />
           <div>
             <button type='button'>Cadastrar item</button>
-            <button type='button'>Histórico</button>
+            {history ? (
+              <button type='button' onClick={() => setHistory(false)}>
+                Vitrine
+              </button>
+            ) : (
+              <button type='button' onClick={() => setHistory(true)}>
+                Histórico
+              </button>
+            )}
             <button
               type='button'
               onClick={(e) => {
@@ -33,8 +38,8 @@ function HeaderUser() {
             >
               Sair
             </button>
+            </div>
           </div>
-        </div>
       </Container>
     </StyledHeaderUser>
   );
