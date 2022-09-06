@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { AdminProvider } from './AdminContext';
 import { ItemProvider } from './ItemContext';
 import { UserProvider } from './UserContext';
 
@@ -8,9 +9,11 @@ interface IGlobalProvider {
 
 function GlobalProvider({ children }: IGlobalProvider) {
   return (
-    <UserProvider>
-      <ItemProvider>{children}</ItemProvider>
-    </UserProvider>
+    <AdminProvider>
+      <UserProvider>
+        <ItemProvider>{children}</ItemProvider>
+      </UserProvider>
+    </AdminProvider>
   );
 }
 
