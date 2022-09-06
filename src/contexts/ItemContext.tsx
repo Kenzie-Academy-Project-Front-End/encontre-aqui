@@ -3,17 +3,19 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useContext,
   useEffect,
   useState,
 } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
+import { UserContext } from './UserContext';
 
 interface IItemProviderProps {
   children: ReactNode;
 }
 
-interface IItem {
+export interface IItem {
   status: string;
   image: string;
   name: string;
@@ -43,14 +45,20 @@ interface IItemContext {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   registerItem: (data: IRegisterItem) => void;
-  status: string;
-  setStatus: Dispatch<SetStateAction<string>>;
-  image: string;
-  setImage: Dispatch<SetStateAction<string>>;
-  name: string;
-  setName: Dispatch<SetStateAction<string>>;
-  description: string;
-  setDescription: Dispatch<SetStateAction<string>>;
+  // status: string;
+  // setStatus: Dispatch<SetStateAction<string>>;
+  // image: string;
+  // setImage: Dispatch<SetStateAction<string>>;
+  // name: string;
+  // setName: Dispatch<SetStateAction<string>>;
+  // description: string;
+  // setDescription: Dispatch<SetStateAction<string>>;
+  currentItem: IItem | null;
+  setCurrentItem: Dispatch<SetStateAction<IItem | null>>;
+  openModalEdit: boolean;
+  setOpenModalEdit: Dispatch<SetStateAction<boolean>>;
+  editItem: (data: IItem) => void;
+  deleteItem: () => void;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -62,10 +70,14 @@ export function ItemProvider({ children }: IItemProviderProps) {
   const [counter, setCounter] = useState<number>(0);
   const [historicCounter, setHistoricCounter] = useState<number>(0);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [status, setStatus] = useState('');
-  const [image, setImage] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+  // const [status, setStatus] = useState('');
+  // const [image, setImage] = useState<string>('');
+  // const [name, setName] = useState<string>('');
+  // const [description, setDescription] = useState<string>('');
+  const [currentItem, setCurrentItem] = useState<IItem | null>(null);
+  const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
+
+  const { setControl, control, user } = useContext(UserContext);
 
   useEffect(() => {
     if (filter === 'all' || filter === '') {
@@ -128,18 +140,57 @@ export function ItemProvider({ children }: IItemProviderProps) {
 
   function registerItem(data: IRegisterItem) {
     api
-      .post('/itens', data, {
+      .post(
+        '/itens',
+        { userId: user.id, ...data },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+
+      .then(() => {
+        toast.success('Item cadastrado com sucesso!');
+        setOpenModal(false);
+        setControl(!control);
+      })
+      .catch(() => toast.error('Erro ao cadastrar item'));
+  }
+
+  function editItem(data: IItem) {
+    api
+      .patch(`/itens/${currentItem?.id}`, data, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
-
       .then(() => {
-        toast.success('Item cadastrado com sucesso!');
-        setOpenModal(false);
+        toast.success('Item editado com sucesso!');
+        setOpenModalEdit(false);
+        setControl(!control);
+        setCurrentItem(null);
       })
-      .catch(() => toast.error('Erro ao cadastrar item'));
+      .catch(() => toast.error('Erro ao editar o item!'));
+  }
+
+  function deleteItem() {
+    api
+      .delete(`/itens/${currentItem?.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then(() => {
+        toast.success('Item deletado com sucesso!');
+        setOpenModalEdit(false);
+        setControl(!control);
+        setCurrentItem(null);
+      })
+      .catch(() => toast.error('Erro ao deletar o item!'));
   }
 
   return (
@@ -158,14 +209,20 @@ export function ItemProvider({ children }: IItemProviderProps) {
         openModal,
         setOpenModal,
         registerItem,
-        status,
-        setStatus,
-        image,
-        setImage,
-        name,
-        setName,
-        description,
-        setDescription,
+        // status,
+        // setStatus,
+        // image,
+        // setImage,
+        // name,
+        // setName,
+        // description,
+        // setDescription,
+        currentItem,
+        setCurrentItem,
+        openModalEdit,
+        setOpenModalEdit,
+        editItem,
+        deleteItem,
       }}
     >
       {children}

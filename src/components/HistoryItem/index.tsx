@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { ItemContext } from '../../contexts/ItemContext';
 import { UserContext } from '../../contexts/UserContext';
 import { StyledHistoryItem } from './styles';
 
 function HistoryItem() {
   const { itens } = useContext(UserContext);
-
+  const { setCurrentItem, setOpenModalEdit, openModalEdit } =
+    useContext(ItemContext);
   return (
     <>
       {itens.map((item) => (
@@ -16,7 +18,6 @@ function HistoryItem() {
                 {item.name}:{' '}
                 <span>{item.status === 'lost' ? 'Perdido' : ' Achado'}</span>
               </p>
-              <AiOutlineEdit size={35} />
             </summary>
             <div>
               <img src={item.image} alt={item.name} />
@@ -26,6 +27,15 @@ function HistoryItem() {
                   {item.description}
                 </p>
               </div>
+            </div>
+            <div className='edit'>
+              <AiOutlineEdit
+                size={35}
+                onClick={() => {
+                  setCurrentItem(item);
+                  setOpenModalEdit(!openModalEdit);
+                }}
+              />
             </div>
           </details>
         </StyledHistoryItem>

@@ -39,6 +39,20 @@ export const StyledHistoryItem = styled.li`
       }
     }
 
+    .edit {
+      width: 100%;
+      min-height: 4rem;
+      display: flex;
+      justify-content: flex-end;
+      border: 1px solid var(--coor-white);
+
+      svg {
+        min-width: 30px;
+        min-height: 30px;
+        cursor: pointer;
+      }
+    }
+
     div {
       width: 100%;
       min-height: 10rem;
