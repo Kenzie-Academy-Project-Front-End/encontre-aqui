@@ -134,14 +134,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       });
   }
 
-  useEffect(() => {
-    const userID = window.localStorage.getItem('userID');
-    if (userID) {
-      navigate('/user', { replace: true });
-    } else {
-      navigate('/', { replace: true });
-    }
-  }, [control]);
+  // useEffect(() => {
+  //   const userID = window.localStorage.getItem('userID');
+  //   if (userID) {
+  //     navigate('/user', { replace: true });
+  //   } else {
+  //     navigate('/', { replace: true });
+  //   }
+  // }, [control]);
 
   useEffect(() => {
     const userID = window.localStorage.getItem('userID');
