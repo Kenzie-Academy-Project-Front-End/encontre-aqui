@@ -3,9 +3,11 @@ import { StyledHeaderUser } from './styles';
 import logo from '../../assets/img/logo.svg';
 import { UserContext } from '../../contexts/UserContext';
 import { Container } from '../Container';
+import { ItemContext } from '../../contexts/ItemContext';
 
 function HeaderUser() {
   const { user, logout, history, setHistory } = useContext(UserContext);
+  const { setOpenModal } = useContext(ItemContext);
 
   return (
     <StyledHeaderUser>
@@ -18,7 +20,9 @@ function HeaderUser() {
             alt='avatar o usuário'
           />
           <div>
-            <button type='button'>Cadastrar item</button>
+            <button type='button' onClick={() => setOpenModal(true)}>
+              Cadastrar item
+            </button>
             {history ? (
               <button type='button' onClick={() => setHistory(false)}>
                 Vitrine

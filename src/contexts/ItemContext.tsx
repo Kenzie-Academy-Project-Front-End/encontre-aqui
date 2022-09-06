@@ -22,6 +22,13 @@ interface IItem {
   id: number;
 }
 
+export interface IRegisterItem {
+  status: string;
+  image: string;
+  name: string;
+  description: string;
+}
+
 interface IItemContext {
   itens: IItem[];
   inputValue: string;
@@ -33,6 +40,17 @@ interface IItemContext {
   paginateRigth: () => void;
   paginateLeft: () => void;
   setCounter: Dispatch<SetStateAction<number>>;
+  openModal: boolean;
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
+  registerItem: (data: IRegisterItem) => void;
+  status: string;
+  setStatus: Dispatch<SetStateAction<string>>;
+  image: string;
+  setImage: Dispatch<SetStateAction<string>>;
+  name: string;
+  setName: Dispatch<SetStateAction<string>>;
+  description: string;
+  setDescription: Dispatch<SetStateAction<string>>;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -43,6 +61,11 @@ export function ItemProvider({ children }: IItemProviderProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [counter, setCounter] = useState<number>(0);
   const [historicCounter, setHistoricCounter] = useState<number>(0);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [status, setStatus] = useState('');
+  const [image, setImage] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
   useEffect(() => {
     if (filter === 'all' || filter === '') {
@@ -103,6 +126,22 @@ export function ItemProvider({ children }: IItemProviderProps) {
     }
   }
 
+  function registerItem(data: IRegisterItem) {
+    api
+      .post('/itens', data, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+
+      .then(() => {
+        toast.success('Item cadastrado com sucesso!');
+        setOpenModal(false);
+      })
+      .catch(() => toast.error('Erro ao cadastrar item'));
+  }
+
   return (
     <ItemContext.Provider
       value={{
@@ -116,6 +155,17 @@ export function ItemProvider({ children }: IItemProviderProps) {
         counter,
         historicCounter,
         setCounter,
+        openModal,
+        setOpenModal,
+        registerItem,
+        status,
+        setStatus,
+        image,
+        setImage,
+        name,
+        setName,
+        description,
+        setDescription,
       }}
     >
       {children}
