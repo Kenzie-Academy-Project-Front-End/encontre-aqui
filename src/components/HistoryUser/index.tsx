@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import { ClaimContext } from '../../contexts/ClaimContext';
+import { ItemContext } from '../../contexts/ItemContext';
 import HistoryClaim from '../HistoryClaim';
 import HistoryItem from '../HistoryItem';
 import ModalDeleteClaim from '../ModalDeleteClaim';
+import { ModalEditItem } from '../ModalEditItem';
 import { StyledClaim, StyledHistory, StyledItem } from './style';
 
 function HistoryUser() {
   const { modalDeleteClaim } = useContext(ClaimContext);
-
+  const { openModalEdit } = useContext(ItemContext);
   return (
     <StyledHistory>
       <StyledItem>
@@ -19,6 +21,7 @@ function HistoryUser() {
         <HistoryClaim />
       </StyledClaim>
       {modalDeleteClaim && <ModalDeleteClaim />}
+      {openModalEdit && <ModalEditItem />}
     </StyledHistory>
   );
 }

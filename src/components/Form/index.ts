@@ -45,7 +45,7 @@ export const ThemeInput = styled.input<IThemeInputProps>`
   font-size: 16px;
   line-height: 26px;
   color: var(--color-black);
-  padding: 10px 15px;
+  padding: 5px 15px;
   border-radius: 4px;
   background: var(--color-gray-0);
   &:focus {

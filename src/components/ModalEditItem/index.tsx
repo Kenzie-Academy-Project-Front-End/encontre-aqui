@@ -2,40 +2,53 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { VscChromeClose } from 'react-icons/vsc';
 import { useContext } from 'react';
-import { Form, ThemeInput, ThemeLabel, ThemeTextForm } from '../Form';
+import { Form, ThemeInput, ThemeLabel } from '../Form';
 import { ContainerModal, ErrorsDiv, ModalBox } from './styles';
 import { ThemeButton } from '../../styles/buttons';
 import { schema } from '../../validators/registerItem';
-import { IRegisterItem, ItemContext } from '../../contexts/ItemContext';
+import { IItem, ItemContext } from '../../contexts/ItemContext';
+import { ThemeTitle } from '../../styles/typography';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
-export function RegisterItem() {
+export function ModalEditItem() {
+  const { editItem, setOpenModalEdit, currentItem, deleteItem } =
+    useContext(ItemContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegisterItem>({ resolver: yupResolver(schema) });
-
-  const { registerItem, setOpenModal } = useContext(ItemContext);
+  } = useForm<IItem>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      status: currentItem?.status,
+      image: currentItem?.image,
+      name: currentItem?.name,
+      description: currentItem?.description,
+    },
+  });
 
   const modalRef = useOutsideClick(() => {
-    setOpenModal(false);
+    setOpenModalEdit(false);
   });
 
   return (
     <ContainerModal>
       <ModalBox>
-        <Form ref={modalRef} onSubmit={handleSubmit(registerItem)}>
-          <div className='title-and-button'>
-            <ThemeTextForm>Cadastrar Item</ThemeTextForm>
-            <button
-              type='button'
-              id='btnCloseModal'
-              onClick={() => setOpenModal(false)}
-            >
-              <VscChromeClose size={25} />
-            </button>
+        <Form ref={modalRef} onSubmit={handleSubmit(editItem)}>
+          <div className='title'>
+            <ThemeTitle className='' tag='h2' titleSize='title2' color='black'>
+              Editar Item
+            </ThemeTitle>
           </div>
+
+          <ThemeButton
+            size='close'
+            buttonColor='false'
+            onClick={() => setOpenModalEdit(false)}
+          >
+            <VscChromeClose size={25} />
+          </ThemeButton>
 
           <ThemeLabel>Status*</ThemeLabel>
           <div
@@ -93,10 +106,19 @@ export function RegisterItem() {
             borderColor={errors.description?.message ? 'error' : 'success'}
           />
           <ErrorsDiv>{errors.description?.message}</ErrorsDiv>
-
-          <ThemeButton size='smaller' buttonColor='orange' type='submit'>
-            Cadastrar Item
-          </ThemeButton>
+          <div className='buttons'>
+            <ThemeButton size='small' buttonColor='orange' type='submit'>
+              Editar
+            </ThemeButton>
+            <ThemeButton
+              size='small'
+              buttonColor='dark-blue'
+              type='button'
+              onClick={() => deleteItem()}
+            >
+              Deletar
+            </ThemeButton>
+          </div>
         </Form>
       </ModalBox>
     </ContainerModal>
