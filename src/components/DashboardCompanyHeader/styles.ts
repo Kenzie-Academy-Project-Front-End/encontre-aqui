@@ -28,11 +28,10 @@ export const StyledDashboardCompanyHeader = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    .nav-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
+    justify-content: center;
+    img{
+        display: none;
+      }
+    
   }
 `;

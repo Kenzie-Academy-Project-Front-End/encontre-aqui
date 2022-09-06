@@ -57,7 +57,7 @@ export function RequiredProvider({ children }: IRequiredProviderProps) {
     api.get<IRequired[]>('/claim').then((res) => setRequired(res.data));
   }, [requireds]);
 
-  console.log(requireds);
+
 
   return (
     <RequiredContext.Provider value={{ requireds, DeleteRequired }}>
