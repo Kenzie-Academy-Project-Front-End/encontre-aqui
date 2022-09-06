@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { KeyframeScale } from '../Container';
 
 export const CardContainer = styled.li`
   width: 33.813rem;
@@ -10,16 +11,7 @@ export const CardContainer = styled.li`
   border: 5px solid var(--color-orange);
   background-color: var(--color-white);
   position: relative;
-  animation: scale-in 1s;
-
-  @keyframes scale-in {
-    0% {
-      transform: scale(0.5);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
+  animation: ${KeyframeScale} 1.5s;
 
   img {
     width: 13.438rem;

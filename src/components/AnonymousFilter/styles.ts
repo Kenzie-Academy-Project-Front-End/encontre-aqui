@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { KeyframeOpacity } from '../Container';
 
 export const StyledAnonymousFilter = styled.div`
   width: 100%;
@@ -7,6 +8,7 @@ export const StyledAnonymousFilter = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  animation: ${KeyframeOpacity} 2.5s;
 
   .div-filter-buttons {
     width: 50%;

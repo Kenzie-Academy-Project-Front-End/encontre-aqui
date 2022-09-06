@@ -18,6 +18,16 @@ export const StyledItem = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  animation: item-effect 2.5s;
+
+  @keyframes item-effect {
+    0% {
+      margin-left: -100%;
+    }
+    100% {
+      margin-left: 0%;
+    }
+  }
 
   h2 {
     font-size: 1.75rem;
@@ -35,6 +45,16 @@ export const StyledClaim = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  animation: claim-effect 2.5s;
+
+  @keyframes claim-effect {
+    0% {
+      margin-right: -100%;
+    }
+    100% {
+      margin-right: 0%;
+    }
+  }
 
   h2 {
     font-size: 1.75rem;
