@@ -1,8 +1,13 @@
+import { useContext } from 'react';
+import { ClaimContext } from '../../contexts/ClaimContext';
 import HistoryClaim from '../HistoryClaim';
 import HistoryItem from '../HistoryItem';
+import ModalDeleteClaim from '../ModalDeleteClaim';
 import { StyledClaim, StyledHistory, StyledItem } from './style';
 
 function HistoryUser() {
+  const { modalDeleteClaim } = useContext(ClaimContext);
+
   return (
     <StyledHistory>
       <StyledItem>
@@ -13,6 +18,7 @@ function HistoryUser() {
         <h2>Reivindicados</h2>
         <HistoryClaim />
       </StyledClaim>
+      {modalDeleteClaim && <ModalDeleteClaim />}
     </StyledHistory>
   );
 }
