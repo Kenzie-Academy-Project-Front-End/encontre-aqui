@@ -1,12 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { VscChromeClose } from 'react-icons/vsc';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { Form, ThemeInput, ThemeLabel, ThemeTextForm } from '../Form';
 import { ContainerModal, ErrorsDiv, ModalBox } from './styles';
 import { ThemeButton } from '../../styles/buttons';
 import { schema } from '../../validators/registerItem';
 import { IRegisterItem, ItemContext } from '../../contexts/ItemContext';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 export function RegisterItem() {
   const {
@@ -17,21 +18,9 @@ export function RegisterItem() {
 
   const { registerItem, setOpenModal } = useContext(ItemContext);
 
-  const modalRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (!modalRef.current?.contains(e.target as HTMLDivElement)) {
-        setOpenModal(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
-  }, []);
+  const modalRef = useOutsideClick(() => {
+    setOpenModal(false);
+  });
 
   return (
     <ContainerModal>
