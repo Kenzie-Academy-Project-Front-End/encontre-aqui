@@ -90,6 +90,8 @@ interface IUserContext {
   history: boolean;
   setHistory: Dispatch<SetStateAction<boolean>>;
   claim: IClaim[];
+  control: boolean;
+  setControl: Dispatch<SetStateAction<boolean>>;
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -215,6 +217,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         history,
         setHistory,
         claim,
+        control,
+        setControl,
       }}
     >
       {children}

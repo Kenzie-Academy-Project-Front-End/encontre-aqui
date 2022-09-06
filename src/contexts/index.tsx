@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { ClaimProvider } from './ClaimContext';
 import { ItemProvider } from './ItemContext';
 import { UserProvider } from './UserContext';
 
@@ -9,7 +10,9 @@ interface IGlobalProvider {
 function GlobalProvider({ children }: IGlobalProvider) {
   return (
     <UserProvider>
-      <ItemProvider>{children}</ItemProvider>
+      <ItemProvider>
+        <ClaimProvider>{children}</ClaimProvider>
+      </ItemProvider>
     </UserProvider>
   );
 }

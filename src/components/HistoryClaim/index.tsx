@@ -1,10 +1,13 @@
 import { useContext } from 'react';
 import { FaTrash } from 'react-icons/fa';
+import { ClaimContext } from '../../contexts/ClaimContext';
 import { UserContext } from '../../contexts/UserContext';
 import { StyledHistoryClaim } from './styles';
 
 function HistoryClaim() {
   const { claim } = useContext(UserContext);
+  const { modalDeleteClaim, setModalDeleteClaim, setIdClaim } =
+    useContext(ClaimContext);
 
   return (
     <>
@@ -38,7 +41,13 @@ function HistoryClaim() {
               </div>
             </div>
             <div className='delete'>
-              <FaTrash size={30} />
+              <FaTrash
+                size={30}
+                onClick={() => {
+                  setIdClaim(item.id);
+                  setModalDeleteClaim(!modalDeleteClaim);
+                }}
+              />
             </div>
           </details>
         </StyledHistoryClaim>
