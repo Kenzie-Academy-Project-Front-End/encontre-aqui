@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { KeyframeOpacity } from '../../components/Container';
 
 export const StyledUserRegister = styled.div`
   display: flex;
@@ -7,6 +8,7 @@ export const StyledUserRegister = styled.div`
   gap: 1.5rem;
   align-items: center;
   position: relative;
+  animation: ${KeyframeOpacity} 2.5s;
 
   .logo {
     display: flex;

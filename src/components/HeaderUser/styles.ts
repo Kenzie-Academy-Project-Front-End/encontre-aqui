@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { KeyframeOpacity } from '../Container';
 
 export const StyledHeaderUser = styled.div`
   display: flex;
   width: 100%;
   background: var(--color-dark-blue-2);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  animation: ${KeyframeOpacity} 2.5s;
   & > div {
     height: 8.625rem;
     justify-content: space-between;
