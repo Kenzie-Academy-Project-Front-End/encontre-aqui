@@ -6,11 +6,14 @@ export const ErrorsDiv = styled.div`
 `;
 
 export const ContainerModal = styled.div`
+  display: flex;
   position: fixed;
   width: 100%;
   min-height: 100vh;
   background: rgba(0, 0, 0, 0.7);
   inset: 0;
+  align-items: center;
+  z-index: 2;
 `;
 
 export const ModalBox = styled.div`
