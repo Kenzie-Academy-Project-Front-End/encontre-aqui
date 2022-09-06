@@ -20,7 +20,6 @@ function HistoryClaim() {
                     : ' Achado'}
                 </span>
               </p>
-              <FaTrash size={30} />
             </summary>
             <div>
               <img
@@ -37,6 +36,9 @@ function HistoryClaim() {
                   {item.user_applicant.description}
                 </p>
               </div>
+            </div>
+            <div className='delete'>
+              <FaTrash size={30} />
             </div>
           </details>
         </StyledHistoryClaim>
