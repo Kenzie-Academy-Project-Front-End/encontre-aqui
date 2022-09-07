@@ -37,9 +37,9 @@ export interface IClaimItem {
     description: string;
     image: string;
   };
-  userId: number;
+  userId: string | null;
 }
-        
+
 export interface IRegisterItem {
   status: string;
   image: string;
@@ -69,6 +69,7 @@ interface IItemContext {
   deleteItem: () => void;
   openModalDeleteItem: boolean;
   setOpenModalDeleteItem: Dispatch<SetStateAction<boolean>>;
+  claimItem: (data: IClaimItem) => void;
 }
 
 export interface IClaimItemResponse {
@@ -177,19 +178,19 @@ export function ItemProvider({ children }: IItemProviderProps) {
     }
   }
 
-  // function claimItem(data: any) {
-  //   const token = window.localStorage.getItem('token');
-  //   const responseClaim = api
-  //     .post<IClaimItemResponse>('/claim', data, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then((response) => response);
-  //   toast.promise(responseClaim, {
-  //     pending: 'Enviando...',
-  //     success: 'Reivindicação realizada com sucesso!',
-  //     error: 'Erro ao realizar reivindicação!',
-  //   });
-  // }
+  function claimItem(data: IClaimItem) {
+    const token = window.localStorage.getItem('token');
+    const responseClaim = api
+      .post<IClaimItemResponse>('/claim', data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response);
+    toast.promise(responseClaim, {
+      pending: 'Enviando...',
+      success: 'Reivindicação realizada com sucesso!',
+      error: 'Erro ao realizar reivindicação!',
+    });
+  }
 
   function registerItem(data: IRegisterItem) {
     api
@@ -203,7 +204,6 @@ export function ItemProvider({ children }: IItemProviderProps) {
           },
         }
       )
-
       .then(() => {
         toast.success('Item cadastrado com sucesso!');
         setOpenModal(false);
@@ -248,7 +248,6 @@ export function ItemProvider({ children }: IItemProviderProps) {
       })
       .catch(() => toast.error('Erro ao deletar o item!', { autoClose: 1500 }));
   }
-        
 
   return (
     <ItemContext.Provider
@@ -274,6 +273,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
         deleteItem,
         openModalDeleteItem,
         setOpenModalDeleteItem,
+        claimItem,
       }}
     >
       {children}

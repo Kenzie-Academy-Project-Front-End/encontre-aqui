@@ -9,7 +9,7 @@ import { AdminLogin } from '../pages/AdminLogin';
 
 export const RoutesMain = () => (
   <Routes>
-    <Route path='*' element={<Navigate replace to='/login' />} />
+    <Route path='*' element={<Navigate replace to='/' />} />
     <Route path='/' element={<LandingPage />} />
     <Route path='/register' element={<UserRegister />} />
     <Route path='/login' element={<UserLogin />} />
