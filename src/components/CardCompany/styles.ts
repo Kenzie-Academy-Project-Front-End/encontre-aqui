@@ -4,7 +4,7 @@ interface ICardCompany {
   isShow: boolean;
 }
 
-export const Card = styled.li<ICardCompany>`
+export const Card = styled.div<ICardCompany>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,9 +159,14 @@ export const CardContainer = styled.main`
           width: 100%;
           max-width: 225px;
           height: 133px;
+          border-radius: 18px 5px;
+          border: 1px solid var(--color-gray-1);
         }
         strong {
           font-weight: 300;
+        }
+        p{
+          text-align: center;
         }
       }
       .container-two {
