@@ -39,7 +39,7 @@ function AnonymousFilter() {
           placeholder='Pesquisar Item'
           onChange={(e) => {
             setInputValue(e.target.value);
-            setFilter(inputValue);
+            setFilter(e.target.value);
           }}
         />
         <ThemeButton

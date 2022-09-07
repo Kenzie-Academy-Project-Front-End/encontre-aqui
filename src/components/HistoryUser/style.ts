@@ -18,7 +18,7 @@ export const StyledItem = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  animation: item-effect 2.5s;
+  animation: item-effect 0.8s;
 
   @keyframes item-effect {
     0% {
@@ -45,7 +45,7 @@ export const StyledClaim = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  animation: claim-effect 2.5s;
+  animation: claim-effect 0.8s;
 
   @keyframes claim-effect {
     0% {

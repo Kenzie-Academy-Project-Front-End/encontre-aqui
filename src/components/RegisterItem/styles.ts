@@ -20,43 +20,29 @@ export const ModalBox = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-
   margin-top: 10px;
   margin-bottom: 10px;
 
   form {
+    position: relative;
     gap: 2.7px;
   }
 
-  .title-and-button {
+  .title {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
   }
 
-  #btnCloseModal {
-    border: none;
-    background: transparent;
-
-    justify-self: flex-end;
+  .buttons {
     display: flex;
-
-    margin-left: 110px;
-    margin-bottom: 0px;
-    margin-top: 0;
-
-    cursor: pointer;
-  }
-
-  input {
-    padding: 5px 15px;
-  }
-
-  p {
-    align-self: center;
-    height: 35px;
-    margin-left: 110px;
-    font-size: 135%;
+    width: 100%;
+    margin-top: 20px;
+    gap: 1rem;
+    & > button {
+      width: 100%;
+    }
   }
 
   #ItemStatusDiv {
@@ -78,33 +64,9 @@ export const ModalBox = styled.div`
     gap: 5px;
   }
 
-  button {
-    margin: 7px 0 13px 0;
-    height: 38px;
-  }
-
   @media screen and (max-width: 495px) {
-    p {
-      height: fit-content;
-      margin-left: 29px;
-    }
-
-    #btnCloseModal {
-      display: flex;
-      margin-left: 14%;
-      height: 25px;
-    }
-
     label {
       font-size: 110%;
-    }
-
-    input {
-      padding: 5px 15px;
-    }
-
-    button {
-      margin: 10px 0 15px 0;
     }
   }
 
@@ -112,7 +74,6 @@ export const ModalBox = styled.div`
     form {
       min-width: unset;
       width: 90%;
-      padding-bottom: unset;
     }
   }
 `;

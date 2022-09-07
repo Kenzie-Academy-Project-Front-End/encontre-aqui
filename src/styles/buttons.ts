@@ -35,13 +35,14 @@ export const ThemeButton = styled.button<IThemeButtonProps>`
           top: 6px;
           right: 8px;
           border: none;
-          background: var(--color-gray-1);
+          background: transparent;
           border-radius: 50%;
-          width: 35px;
+          width: 30px;
           height: 30px;
+          padding-top: 2px;
           color: var(--color-black);
           &:hover {
-            background: var(--color-orange);
+            background: var(transparent);
           }
         `;
       default:
