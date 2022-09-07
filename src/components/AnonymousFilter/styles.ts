@@ -19,6 +19,21 @@ export const StyledAnonymousFilter = styled.div`
       width: 9.375rem;
       height: 3.125rem;
       font-size: 1.25rem;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      outline: none;
+      box-shadow: 0 5px var(--color-orange-2);
+
+      :hover {
+        box-shadow: 0 4px var(--color-orange-2);
+        top: 1px;
+      }
+
+      :active {
+        box-shadow: 0 0 var(--color-orange-2);
+        top: 5px;
+      }
     }
   }
 
@@ -42,6 +57,21 @@ export const StyledAnonymousFilter = styled.div`
       min-width: 9.375rem;
       height: 3.125rem;
       font-size: 1.25rem;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      outline: none;
+      box-shadow: 0 5px var(--color-orange-2);
+
+      :hover {
+        box-shadow: 0 4px var(--color-orange-2);
+        top: 1px;
+      }
+
+      :active {
+        box-shadow: 0 0 var(--color-orange-2);
+        top: 5px;
+      }
     }
   }
 
