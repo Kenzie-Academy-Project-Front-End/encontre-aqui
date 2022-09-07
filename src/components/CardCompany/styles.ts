@@ -168,6 +168,10 @@ export const CardContainer = styled.main`
         p{
           text-align: center;
         }
+
+        .container-one__status{
+          text-transform: uppercase;
+        }
       }
       .container-two {
         display: flex;
