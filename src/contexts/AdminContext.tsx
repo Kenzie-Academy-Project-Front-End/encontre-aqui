@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
@@ -19,6 +25,9 @@ interface IAdminContext {
   showPassword: () => void;
   type: string;
   icon: boolean;
+  loginAdmin: boolean;
+  setLoginAdmin: Dispatch<SetStateAction<boolean>>;
+  redirectAdminLogin: () => void;
 }
 
 export const AdminContext = createContext({} as IAdminContext);
@@ -26,11 +35,11 @@ export const AdminContext = createContext({} as IAdminContext);
 export const AdminProvider = ({ children }: IAdminProviderProps) => {
   const [type, setType] = useState<string>('password');
   const [icon, setIcon] = useState<boolean>(true);
+  const [loginAdmin, setLoginAdmin] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   function adminLogin(data: ILogin) {
-    // mudar para email admin@gmail.com
     if (data.email !== 'admin@gmail.com') {
       toast.warn('O email não tem permissão admin!', { autoClose: 2000 });
     } else {
@@ -46,9 +55,9 @@ export const AdminProvider = ({ children }: IAdminProviderProps) => {
             '@encontreAqui:adminToken',
             response.data.accessToken
           );
+          setLoginAdmin(true);
           toast.success('Bem vindo (a)!', { autoClose: 2000 });
-          // navigate('/user', { replace: true });
-          // console.log('Redirecionar para página admin');
+          navigate('/company', { replace: true });
         })
         .catch((err) => {
           toast.error(err?.response?.data, { autoClose: 2000 });
@@ -66,6 +75,13 @@ export const AdminProvider = ({ children }: IAdminProviderProps) => {
     }
   }
 
+  function redirectAdminLogin() {
+    setTimeout(() => {
+      window.localStorage.clear();
+      navigate('/admin', { replace: true });
+    }, 100);
+  }
+
   return (
     <AdminContext.Provider
       value={{
@@ -73,6 +89,9 @@ export const AdminProvider = ({ children }: IAdminProviderProps) => {
         showPassword,
         type,
         icon,
+        loginAdmin,
+        setLoginAdmin,
+        redirectAdminLogin
       }}
     >
       {children}
