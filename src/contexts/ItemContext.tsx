@@ -190,6 +190,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
       success: 'Reivindicação realizada com sucesso!',
       error: 'Erro ao realizar reivindicação!',
     });
+    setControl(!control);
   }
 
   function registerItem(data: IRegisterItem) {
