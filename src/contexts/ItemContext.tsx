@@ -118,6 +118,10 @@ export function ItemProvider({ children }: IItemProviderProps) {
     if (counter + 6 < itens.length) {
       setCounter(counter + 6);
       setHistoricCounter(counter + 6);
+      const body = document.querySelector('#root');
+      body?.scrollIntoView({
+        behavior: 'smooth',
+      });
     }
   }
 
@@ -125,6 +129,10 @@ export function ItemProvider({ children }: IItemProviderProps) {
     if (counter > 0) {
       setCounter(counter - 6);
       setHistoricCounter(counter - 6);
+      const body = document.querySelector('#root');
+      body?.scrollIntoView({
+        behavior: 'smooth',
+      });
     }
   }
 
