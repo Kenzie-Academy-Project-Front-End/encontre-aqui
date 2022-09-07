@@ -24,6 +24,22 @@ export interface IItem {
   id: number;
 }
 
+export interface IClaimItem {
+  user_required: {
+    email: string;
+    phone: string;
+    social_network: string | null;
+    item: IItem;
+  };
+  user_applicant: {
+    email: string;
+    phone: string;
+    description: string;
+    image: string;
+  };
+  userId: number;
+}
+        
 export interface IRegisterItem {
   status: string;
   image: string;
@@ -53,6 +69,31 @@ interface IItemContext {
   deleteItem: () => void;
   openModalDeleteItem: boolean;
   setOpenModalDeleteItem: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IClaimItemResponse {
+  user_required: {
+    email: string;
+    phone: string;
+    social_network: string;
+    item: {
+      status: string;
+      image: string;
+      name: string;
+      description: string;
+      userId: number;
+      id: number;
+    };
+  };
+  user_applicant: {
+    email: string;
+    phone: string;
+    social_network: string;
+    description: string;
+    image: string;
+  };
+  userId: number;
+  id: number;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -136,6 +177,20 @@ export function ItemProvider({ children }: IItemProviderProps) {
     }
   }
 
+  // function claimItem(data: any) {
+  //   const token = window.localStorage.getItem('token');
+  //   const responseClaim = api
+  //     .post<IClaimItemResponse>('/claim', data, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((response) => response);
+  //   toast.promise(responseClaim, {
+  //     pending: 'Enviando...',
+  //     success: 'Reivindicação realizada com sucesso!',
+  //     error: 'Erro ao realizar reivindicação!',
+  //   });
+  // }
+
   function registerItem(data: IRegisterItem) {
     api
       .post(
@@ -193,6 +248,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
       })
       .catch(() => toast.error('Erro ao deletar o item!', { autoClose: 1500 }));
   }
+        
 
   return (
     <ItemContext.Provider
