@@ -10,27 +10,21 @@ export const StyledModalClaim = styled.div`
   justify-content: center;
   top: 0;
   left: 0;
+  background: rgba(0, 0, 0, 0.7);
 
   .content {
     position: relative;
-    padding: 3rem;
     width: 100%;
-    height: 90vh;
-    max-width: 600px;
+    max-width: 500px;
     background: #08062d;
     border: 5px solid #e88510;
     border-radius: 18px;
 
-    .title {
-      margin-top: 1rem;
-      text-align: center;
-    }
-
     .close {
       cursor: pointer;
       position: absolute;
-      top: 2rem;
-      right: 2rem;
+      top: 5px;
+      right: 5px;
       transition: 0.4s;
       &:hover {
         opacity: 1;
@@ -38,12 +32,22 @@ export const StyledModalClaim = styled.div`
     }
 
     .divForm {
-      margin: 1.5rem 0;
+      & > form {
+        display: flex;
+        padding: 1rem;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 1rem;
+
+        .title {
+          text-align: center;
+        }
+      }
 
       .textArea {
         background-color: #ffffff;
         border-radius: 5px;
-        height: 45vh;
+        height: 30vh;
         width: 100%;
         padding: 1rem;
         font-weight: 300;
@@ -63,18 +67,15 @@ export const StyledModalClaim = styled.div`
         font-size: 1.5rem;
       }
     }
+  }
 
-    @media (max-width: 400px) {
-      .header {
-        display: flex;
-        flex-direction: column-reverse;
-      }
-
-      .close {
-        position: unset;
-        display: flex;
-        justify-content: end;
-      }
+  @media (max-width: 400px) {
+    .content {
+      max-width: 290px;
+    }
+    .header {
+      display: flex;
+      flex-direction: column-reverse;
     }
   }
 `;

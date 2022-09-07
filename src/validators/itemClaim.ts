@@ -4,5 +4,6 @@ export const formSchema = yup.object().shape({
   description: yup
     .string()
     .required('O preenchimento da descrição é obrigatório')
-    .max(172, 'Sua descrição não deve ser maior que 172 caracteres'),
+    .min(50, 'Mínimo de 50 caracteres')
+    .max(172, 'Máximo de 172 caracteres'),
 });
