@@ -8,7 +8,7 @@ export const StyledHistoryItem = styled.li`
 
   details {
     width: 100%;
-    padding: 1rem;
+    padding: 1.3rem;
 
     summary {
       display: flex;

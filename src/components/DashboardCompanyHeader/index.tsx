@@ -1,14 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import { BiExit } from 'react-icons/bi';
+import { useContext } from 'react';
 import logo from '../../assets/img/logo.svg';
 import { StyledDashboardCompanyHeader, Wrap } from './styles';
+import { AdminContext } from '../../contexts/AdminContext';
 
 function DashboardCompanyHeader() {
   const navigate = useNavigate();
+  const { setLoginAdmin } = useContext(AdminContext);
 
   function pageDirection() {
     localStorage.clear();
-    navigate('/register', { replace: true });
+    setLoginAdmin(false);
+    navigate('/admin', { replace: true });
   }
 
   return (
