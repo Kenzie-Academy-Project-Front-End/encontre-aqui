@@ -23,7 +23,7 @@ function CardCompany({ required, applicant, id, userId }: ICardCompany) {
   return (
     <Card isShow={showMain}>
       <header>
-        <ThemeTitle className='' tag='h2' titleSize='title5' color='white'>
+        <ThemeTitle className='' tag='h2' titleSize='title10' color='white'>
           Reividicações - ID
         </ThemeTitle>
         <button type='button' onClick={IsShowMain}>
@@ -34,10 +34,10 @@ function CardCompany({ required, applicant, id, userId }: ICardCompany) {
       <CardContainer>
         <div className='card-container-one'>
           <div className='card-container-one__header'>
-            <ThemeTitle className='' tag='h3' titleSize='title6' color='black'>
+            <ThemeTitle className='' tag='h3' titleSize='title11' color='black'>
               Item
             </ThemeTitle>
-            <ThemeTitle className='' tag='h3' titleSize='title6' color='black'>
+            <ThemeTitle className='' tag='h3' titleSize='title11' color='black'>
               Requerido
             </ThemeTitle>
           </div>

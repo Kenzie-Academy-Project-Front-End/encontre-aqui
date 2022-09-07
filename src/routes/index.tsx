@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import AnonymousNavigate from '../pages/Anonymous';
 import DashboardCompany from '../pages/DashboardCompany';
-import { RegisterUser } from '../pages/RegisterUser';
 import { LandingPage } from '../pages/LandingPage';
 import { UserRegister } from '../pages/UserRegister';
 import { UserLogin } from '../pages/UserLogin';

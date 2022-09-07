@@ -40,20 +40,18 @@ export const ThemeTitle = styled(BaseTitle)<IThemeTitleProps>`
           font-size: 25px;
           line-height: 36px;
         `;
-        case 'title10':
-        //antigo title 5
+      case 'title10':
         return css`
           font-size: 30px;
           line-height: 36px;
-         `;
-         
-         case 'title11':
-         //antigo title 6
+        `;
+
+      case 'title11':
         return css`
           font-size: 25px;
           line-height: 30px;
-         `;
-         
+        `;
+
       default:
         return false;
     }
