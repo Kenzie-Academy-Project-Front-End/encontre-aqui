@@ -46,12 +46,12 @@ export const AdminProvider = ({ children }: IAdminProviderProps) => {
             '@encontreAqui:adminToken',
             response.data.accessToken
           );
-          toast.success('Bem vindo (a)!');
+          toast.success('Bem vindo (a)!', { autoClose: 2000 });
           // navigate('/user', { replace: true });
-          console.log('Redirecionar para página admin');
+          // console.log('Redirecionar para página admin');
         })
         .catch((err) => {
-          toast.error(err?.response?.data);
+          toast.error(err?.response?.data, { autoClose: 2000 });
         });
     }
   }

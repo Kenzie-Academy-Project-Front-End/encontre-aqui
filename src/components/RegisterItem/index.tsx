@@ -2,12 +2,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { VscChromeClose } from 'react-icons/vsc';
 import { useContext } from 'react';
-import { Form, ThemeInput, ThemeLabel, ThemeTextForm } from '../Form';
+import { Form, ThemeInput, ThemeLabel } from '../Form';
 import { ContainerModal, ErrorsDiv, ModalBox } from './styles';
 import { ThemeButton } from '../../styles/buttons';
 import { schema } from '../../validators/registerItem';
 import { IRegisterItem, ItemContext } from '../../contexts/ItemContext';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { ThemeTitle } from '../../styles/typography';
 
 export function RegisterItem() {
   const {
@@ -26,16 +27,19 @@ export function RegisterItem() {
     <ContainerModal>
       <ModalBox>
         <Form ref={modalRef} onSubmit={handleSubmit(registerItem)}>
-          <div className='title-and-button'>
-            <ThemeTextForm>Cadastrar Item</ThemeTextForm>
-            <button
-              type='button'
-              id='btnCloseModal'
-              onClick={() => setOpenModal(false)}
-            >
-              <VscChromeClose size={25} />
-            </button>
+          <div className='title'>
+            <ThemeTitle className='' tag='h2' titleSize='title1' color='black'>
+              Cadastrar Item
+            </ThemeTitle>
           </div>
+
+          <ThemeButton
+            size='close'
+            buttonColor='false'
+            onClick={() => setOpenModal(false)}
+          >
+            <VscChromeClose size={25} />
+          </ThemeButton>
 
           <ThemeLabel>Status*</ThemeLabel>
           <div
@@ -93,10 +97,11 @@ export function RegisterItem() {
             borderColor={errors.description?.message ? 'error' : 'success'}
           />
           <ErrorsDiv>{errors.description?.message}</ErrorsDiv>
-
-          <ThemeButton size='smaller' buttonColor='orange' type='submit'>
-            Cadastrar Item
-          </ThemeButton>
+          <div className='buttons'>
+            <ThemeButton size='small' buttonColor='orange' type='submit'>
+              Cadastrar Item
+            </ThemeButton>
+          </div>
         </Form>
       </ModalBox>
     </ContainerModal>

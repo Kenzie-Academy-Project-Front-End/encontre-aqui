@@ -9,10 +9,16 @@ import { schema } from '../../validators/registerItem';
 import { IItem, ItemContext } from '../../contexts/ItemContext';
 import { ThemeTitle } from '../../styles/typography';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { ModalDeleteItem } from './ModalDeleteItem';
 
 export function ModalEditItem() {
-  const { editItem, setOpenModalEdit, currentItem, deleteItem } =
-    useContext(ItemContext);
+  const {
+    editItem,
+    setOpenModalEdit,
+    currentItem,
+    openModalDeleteItem,
+    setOpenModalDeleteItem,
+  } = useContext(ItemContext);
 
   const {
     register,
@@ -30,6 +36,7 @@ export function ModalEditItem() {
 
   const modalRef = useOutsideClick(() => {
     setOpenModalEdit(false);
+    setOpenModalDeleteItem(false);
   });
 
   return (
@@ -37,7 +44,7 @@ export function ModalEditItem() {
       <ModalBox>
         <Form ref={modalRef} onSubmit={handleSubmit(editItem)}>
           <div className='title'>
-            <ThemeTitle className='' tag='h2' titleSize='title2' color='black'>
+            <ThemeTitle className='' tag='h2' titleSize='title1' color='black'>
               Editar Item
             </ThemeTitle>
           </div>
@@ -114,11 +121,12 @@ export function ModalEditItem() {
               size='small'
               buttonColor='dark-blue'
               type='button'
-              onClick={() => deleteItem()}
+              onClick={() => setOpenModalDeleteItem(!openModalDeleteItem)}
             >
-              Deletar
+              Excluir
             </ThemeButton>
           </div>
+          {openModalDeleteItem && <ModalDeleteItem />}
         </Form>
       </ModalBox>
     </ContainerModal>

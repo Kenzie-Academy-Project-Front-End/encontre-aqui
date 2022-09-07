@@ -45,20 +45,14 @@ interface IItemContext {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   registerItem: (data: IRegisterItem) => void;
-  // status: string;
-  // setStatus: Dispatch<SetStateAction<string>>;
-  // image: string;
-  // setImage: Dispatch<SetStateAction<string>>;
-  // name: string;
-  // setName: Dispatch<SetStateAction<string>>;
-  // description: string;
-  // setDescription: Dispatch<SetStateAction<string>>;
   currentItem: IItem | null;
   setCurrentItem: Dispatch<SetStateAction<IItem | null>>;
   openModalEdit: boolean;
   setOpenModalEdit: Dispatch<SetStateAction<boolean>>;
   editItem: (data: IItem) => void;
   deleteItem: () => void;
+  openModalDeleteItem: boolean;
+  setOpenModalDeleteItem: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -70,12 +64,10 @@ export function ItemProvider({ children }: IItemProviderProps) {
   const [counter, setCounter] = useState<number>(0);
   const [historicCounter, setHistoricCounter] = useState<number>(0);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  // const [status, setStatus] = useState('');
-  // const [image, setImage] = useState<string>('');
-  // const [name, setName] = useState<string>('');
-  // const [description, setDescription] = useState<string>('');
   const [currentItem, setCurrentItem] = useState<IItem | null>(null);
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
+  const [openModalDeleteItem, setOpenModalDeleteItem] =
+    useState<boolean>(false);
 
   const { setControl, control, user } = useContext(UserContext);
 
@@ -84,13 +76,11 @@ export function ItemProvider({ children }: IItemProviderProps) {
       api.get<IItem[]>('/itens').then((res) => {
         setItens(res.data);
       });
-    }
-    if (filter === 'found' || filter === 'lost') {
+    } else if (filter === 'found' || filter === 'lost') {
       api.get<IItem[]>(`/itens?status=${filter}`).then((res) => {
         setItens(res.data);
       });
-    }
-    if (
+    } else if (
       filter !== 'all' &&
       filter !== 'found' &&
       filter !== 'lost' &&
@@ -119,7 +109,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
   function errorClaim() {
     toast.warn('Faça login ou cadastre-se para reivindicar um item', {
       position: 'top-right',
-      autoClose: 3000,
+      autoClose: 2000,
       closeOnClick: false,
     });
   }
@@ -185,12 +175,15 @@ export function ItemProvider({ children }: IItemProviderProps) {
         },
       })
       .then(() => {
-        toast.success('Item deletado com sucesso!');
-        setOpenModalEdit(false);
-        setControl(!control);
-        setCurrentItem(null);
+        toast.success('Item deletado com sucesso!', { autoClose: 1500 });
+        setTimeout(() => {
+          setOpenModalDeleteItem(false);
+          setOpenModalEdit(false);
+          setControl(!control);
+          setCurrentItem(null);
+        }, 2000);
       })
-      .catch(() => toast.error('Erro ao deletar o item!'));
+      .catch(() => toast.error('Erro ao deletar o item!', { autoClose: 1500 }));
   }
 
   return (
@@ -209,20 +202,14 @@ export function ItemProvider({ children }: IItemProviderProps) {
         openModal,
         setOpenModal,
         registerItem,
-        // status,
-        // setStatus,
-        // image,
-        // setImage,
-        // name,
-        // setName,
-        // description,
-        // setDescription,
         currentItem,
         setCurrentItem,
         openModalEdit,
         setOpenModalEdit,
         editItem,
         deleteItem,
+        openModalDeleteItem,
+        setOpenModalDeleteItem,
       }}
     >
       {children}
