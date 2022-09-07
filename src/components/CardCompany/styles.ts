@@ -4,7 +4,7 @@ interface ICardCompany {
   isShow: boolean;
 }
 
-export const Card = styled.div<ICardCompany>`
+export const Card = styled.li<ICardCompany>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,7 +131,7 @@ export const CardContainer = styled.main`
     }
     .card-container-one__body {
       display: flex;
-
+      justify-content: space-between;
       width: 100%;
       max-width: 671px;
       height: 440px;
@@ -167,6 +167,7 @@ export const CardContainer = styled.main`
       .container-two {
         display: flex;
         flex-direction: column;
+        align-items: center;
 
         width: 100%;
         max-width: 300px;
@@ -193,6 +194,7 @@ export const CardContainer = styled.main`
   .card-container-two {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     width: 100%;
     max-width: 270px;
@@ -202,6 +204,7 @@ export const CardContainer = styled.main`
     .card-container-two__body {
       display: flex;
       flex-direction: column;
+      align-items: center;
 
       width: 100%;
       max-width: 270px;
@@ -222,6 +225,7 @@ export const CardContainer = styled.main`
 
       strong {
         font-weight: bold;
+        text-align: center;
       }
 
       @media screen and (max-width: 826px) {
