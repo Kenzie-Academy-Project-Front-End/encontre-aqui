@@ -1,26 +1,21 @@
 import { useContext } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
-import { ClaimContext } from '../../contexts/ClaimContext';
-import { outsideClickModalDeleteClaim } from '../../hooks/outsideClickModalDeleteClaim';
-import { ThemeButton } from '../../styles/buttons';
-import { ThemeTitle } from '../../styles/typography';
+import { ItemContext } from '../../../contexts/ItemContext';
+import { ThemeButton } from '../../../styles/buttons';
+import { ThemeTitle } from '../../../styles/typography';
 import { StyledModalDeleteClaim } from './styles';
 
-function ModalDeleteClaim() {
-  const { modalDeleteClaim, setModalDeleteClaim, deleteClaim } =
-    useContext(ClaimContext);
-
-  const deleteClaimModal = outsideClickModalDeleteClaim(() => {
-    setModalDeleteClaim(!modalDeleteClaim);
-  });
+export function ModalDeleteItem() {
+  const { deleteItem, openModalDeleteItem, setOpenModalDeleteItem } =
+    useContext(ItemContext);
 
   return (
     <StyledModalDeleteClaim>
-      <div ref={deleteClaimModal}>
+      <div>
         <ThemeButton
           size='close'
           buttonColor='false'
-          onClick={() => setModalDeleteClaim(!modalDeleteClaim)}
+          onClick={() => setOpenModalDeleteItem(!openModalDeleteItem)}
         >
           <VscChromeClose size={25} />
         </ThemeButton>
@@ -31,7 +26,8 @@ function ModalDeleteClaim() {
           <ThemeButton
             size='small'
             buttonColor='dark-blue'
-            onClick={() => setModalDeleteClaim(!modalDeleteClaim)}
+            onClick={() => setOpenModalDeleteItem(!openModalDeleteItem)}
+            type='button'
           >
             Voltar
           </ThemeButton>
@@ -39,7 +35,8 @@ function ModalDeleteClaim() {
             className='button-delete'
             size='small'
             buttonColor='dark-blue'
-            onClick={() => deleteClaim()}
+            onClick={() => deleteItem()}
+            type='button'
           >
             Excluir
           </ThemeButton>
@@ -48,5 +45,3 @@ function ModalDeleteClaim() {
     </StyledModalDeleteClaim>
   );
 }
-
-export default ModalDeleteClaim;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface IThemeButtonProps {
   size: string;
-  buttonColor: string;
+  buttonColor: string | undefined;
 }
 
 export const ThemeButton = styled.button<IThemeButtonProps>`
@@ -27,6 +27,24 @@ export const ThemeButton = styled.button<IThemeButtonProps>`
         return css`
           padding: 5px 10px;
         `;
+      case 'close':
+        return css`
+          font-size: 25px;
+          line-height: 25px;
+          position: absolute;
+          top: 6px;
+          right: 8px;
+          border: none;
+          background: transparent;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          padding-top: 2px;
+          color: var(--color-black);
+          &:hover {
+            background: var(transparent);
+          }
+        `;
       default:
         return false;
     }
@@ -48,11 +66,11 @@ export const ThemeButton = styled.button<IThemeButtonProps>`
       case 'dark-blue':
         return css`
           background: var(--color-dark-blue-2);
-          border: 2px solid var(--color-orange);
+          border: 2px solid var(--color-dark-blue-2);
 
           &:hover {
             background: var(--color-dark-blue-2);
-            border: 2px solid var(--color-orange);
+            border: 2px solid var(--color-dark-blue-2);
             opacity: 0.8;
           }
         `;

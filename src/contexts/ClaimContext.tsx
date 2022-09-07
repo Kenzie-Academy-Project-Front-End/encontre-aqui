@@ -61,20 +61,20 @@ export function ClaimProvider({ children }: IClaimProviderProps) {
   function sucessDeleteClaim() {
     toast.success('Reivindicação deletada com sucesso', {
       position: 'top-right',
-      autoClose: 2500,
+      autoClose: 2000,
       closeOnClick: false,
     });
 
     setTimeout(() => {
       setControl(!control);
       setModalDeleteClaim(!modalDeleteClaim);
-    }, 2500);
+    }, 2000);
   }
 
   function errorDeleteClaim() {
     toast.error('Houve algum problema', {
       position: 'top-right',
-      autoClose: 2500,
+      autoClose: 2000,
       closeOnClick: false,
     });
   }

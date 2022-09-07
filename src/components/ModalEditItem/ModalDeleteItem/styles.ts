@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledModalDeleteClaim = styled.div`
   height: 100vh;
   width: 100vw;
-  z-index: 1;
+  z-index: 3;
   position: fixed;
   display: flex;
   top: 0;

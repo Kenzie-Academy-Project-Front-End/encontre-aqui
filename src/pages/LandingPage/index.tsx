@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Container } from '../../components/LandingPage';
 import { ThemeButton } from '../../styles/buttons';
 import { ThemeTitle } from '../../styles/typography';
@@ -29,7 +30,16 @@ export const LandingPage = () => {
             type='button'
             size='medium'
             buttonColor='orange'
-            onClick={() => navigate('/login', { replace: true })}
+            onClick={() => {
+              toast.success('Redirecinando para o login', {
+                autoClose: 1500,
+                closeOnClick: false,
+                closeButton: false,
+              });
+              setTimeout(() => {
+                navigate('/login', { replace: true });
+              }, 1600);
+            }}
           >
             Login
           </ThemeButton>
@@ -38,7 +48,16 @@ export const LandingPage = () => {
             type='button'
             size='medium'
             buttonColor='orange'
-            onClick={() => navigate('/anonymous', { replace: true })}
+            onClick={() => {
+              toast('🙂 Fique a vontade 🙃', {
+                autoClose: 1500,
+                closeOnClick: false,
+                closeButton: false,
+              });
+              setTimeout(() => {
+                navigate('/anonymous', { replace: true });
+              }, 1600);
+            }}
           >
             Ver Itens
           </ThemeButton>

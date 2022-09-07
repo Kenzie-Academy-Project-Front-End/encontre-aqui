@@ -114,7 +114,9 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [icon, setIcon] = useState<boolean>(true);
   const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
   const [history, setHistory] = useState<boolean>(false);
+
   const [userClaim, setUserClaim] = useState<IUserClaim>({} as IUserClaim);
+
   const navigate = useNavigate();
 
   function registerUser(data: IRegisterUser) {
@@ -136,23 +138,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         window.localStorage.clear();
         window.localStorage.setItem('userID', response.data.user.id);
         window.localStorage.setItem('token', response.data.accessToken);
-        toast.success('Bem vindo (a)!');
+        toast.success('Bem vindo (a)!', { autoClose: 2000 });
         navigate('/user', { replace: true });
         setControl(!control);
       })
       .catch((err) => {
-        toast.error(err?.response?.data);
+        toast.error(err?.response?.data, { autoClose: 2000 });
       });
   }
-
-  // useEffect(() => {
-  //   const userID = window.localStorage.getItem('userID');
-  //   if (userID) {
-  //     navigate('/user', { replace: true });
-  //   } else {
-  //     navigate('/', { replace: true });
-  //   }
-  // }, [control]);
 
   useEffect(() => {
     const userID = window.localStorage.getItem('userID');
@@ -198,7 +191,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   function logout() {
     toast.success('Até a próxima', {
       position: 'top-right',
-      autoClose: 2500,
+      autoClose: 2000,
       closeOnClick: false,
     });
     setTimeout(() => {

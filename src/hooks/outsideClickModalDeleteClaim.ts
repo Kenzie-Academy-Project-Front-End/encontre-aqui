@@ -1,0 +1,18 @@
+import { useEffect, useRef } from 'react';
+
+export const outsideClickModalDeleteClaim = (callbackFunction: () => void) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function handleOutclick(event: MouseEvent) {
+      if (!ref?.current?.contains(event.target as HTMLDivElement)) {
+        callbackFunction();
+      }
+    }
+    document.addEventListener('mousedown', handleOutclick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutclick);
+    };
+  });
+
+  return ref;
+};

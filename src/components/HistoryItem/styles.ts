@@ -8,7 +8,7 @@ export const StyledHistoryItem = styled.li`
 
   details {
     width: 100%;
-    padding: 1rem;
+    padding: 1.3rem;
 
     summary {
       display: flex;
@@ -36,6 +36,20 @@ export const StyledHistoryItem = styled.li`
         p {
           text-align: justify;
         }
+      }
+    }
+
+    .edit {
+      width: 100%;
+      min-height: 4rem;
+      display: flex;
+      justify-content: flex-end;
+      border: 1px solid var(--coor-white);
+
+      svg {
+        min-width: 30px;
+        min-height: 30px;
+        cursor: pointer;
       }
     }
 
