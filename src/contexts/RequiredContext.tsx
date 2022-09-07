@@ -1,5 +1,7 @@
+import { toast } from 'react-toastify';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { api } from '../services/api';
+
 
 interface IItem {
   status: string;
@@ -34,7 +36,7 @@ interface IRequired {
 
 interface IRequiredContext {
   requireds: IRequired[];
-  DeleteRequired: (id:number)=> void;
+  deleteRequired: (id:number)=> void;
 }
 
 interface IRequiredProviderProps {
@@ -46,11 +48,32 @@ export const RequiredContext = createContext({} as IRequiredContext);
 export function RequiredProvider({ children }: IRequiredProviderProps) {
   const [requireds, setRequired] = useState<IRequired[]>([]);
 
-  function DeleteRequired(id: number) {
-    api.delete(`/claim/${id}`,  {
-      headers: {Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTY2MjQ5NTI4OCwiZXhwIjoxNjYyNDk4ODg4LCJzdWIiOiI0In0.0kTH2ybijxvdiBu5ecz_YMLLt1e96_MCkQMiR6KzJ_k`}
+
+  function sucessDeleteRequired() {
+    toast.success('Reivindicação deletada com sucesso', {
+      position: 'top-right',
+      autoClose: 2500,
+      closeOnClick: false,
+    });
   }
-    ).then(response=>console.log(response));
+
+  function errorDeleteRequired() {
+    toast.error('Houve algum problema', {
+      position: 'top-right',
+      autoClose: 2500,
+      closeOnClick: false,
+    });
+  }
+
+
+  function deleteRequired(id: number) {
+    const token = window.localStorage.getItem('@encontreAqui:adminToken');
+  
+    api.delete(`/claim/${id}`,  {
+      headers: {Authorization: `Bearer ${token}`}
+  }
+    ).then(()=>sucessDeleteRequired())
+    .catch(()=>errorDeleteRequired());
   }
 
   useEffect(() => {
@@ -60,7 +83,7 @@ export function RequiredProvider({ children }: IRequiredProviderProps) {
 
 
   return (
-    <RequiredContext.Provider value={{ requireds, DeleteRequired }}>
+    <RequiredContext.Provider value={{ requireds, deleteRequired }}>
       {children}
     </RequiredContext.Provider>
   );

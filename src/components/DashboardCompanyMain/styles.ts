@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledDashboarCompanyMain = styled.div`
+export const StyledDashboarCompanyMain = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -4,7 +4,7 @@ interface ICardCompany {
   isShow: boolean;
 }
 
-export const Card = styled.button<ICardCompany>`
+export const Card = styled.div<ICardCompany>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +24,9 @@ export const Card = styled.button<ICardCompany>`
     width: 100%;
     height: ${(props) => (props.isShow === false ? '100%' : null)};
     padding: 36px;
+
+
+    
 
     button {
       width: 40px;
@@ -104,6 +107,7 @@ export const CardContainer = styled.main`
 
   width: 100%;
   max-width: 1000px;
+  
   height: 521px;
 
   padding: 26px;
@@ -193,7 +197,7 @@ export const CardContainer = styled.main`
     width: 100%;
     max-width: 270px;
 
-    gap: 20px;
+    gap: 15px;
 
     .card-container-two__body {
       display: flex;
@@ -201,7 +205,8 @@ export const CardContainer = styled.main`
 
       width: 100%;
       max-width: 270px;
-      height: 440px;
+      height: 100%;
+      max-height: 420px;
 
       padding: 19px 25px;
 
@@ -213,7 +218,7 @@ export const CardContainer = styled.main`
       font-weight: 300;
 
       color: #000000;
-      gap: 20px;
+      gap: 13px;
 
       strong {
         font-weight: bold;

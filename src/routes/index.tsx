@@ -15,7 +15,6 @@ export const RoutesMain = () => (
     <Route path='/login' element={<UserLogin />} />
     <Route path='/anonymous' element={<AnonymousNavigate />} />
     <Route path='/company' element={<DashboardCompany/>}/>
-    <Route path='/company' element={<DashboardCompany/>}/>
     <Route path='/user' element={<UserNavigate />} />
     <Route path='/admin' element={<AdminLogin />} />
 

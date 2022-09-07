@@ -15,7 +15,6 @@ function DashboarCompanyMain() {
             required={required.user_required}
             applicant={required.user_applicant}
             id={required.id}
-            userId={required.id}
           />
         </CardContainer>
       ))}

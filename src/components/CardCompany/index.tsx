@@ -1,32 +1,49 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { GoTrashcan } from 'react-icons/go';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { ThemeTitle } from '../../styles/typography';
 import { Card, CardContainer, TrashBtn } from './styles';
-import { IUserApplicant, IUserRequired, RequiredContext } from '../../contexts/RequiredContext';
+import {
+  IUserApplicant,
+  IUserRequired,
+  RequiredContext,
+} from '../../contexts/RequiredContext';
 
 interface ICardCompany {
   required: IUserRequired;
   applicant: IUserApplicant;
   id: number;
-  userId: number;
 }
 
-function CardCompany({ required, applicant, id, userId }: ICardCompany) {
-  const {DeleteRequired} = useContext(RequiredContext);
+function CardCompany({ required, applicant, id }: ICardCompany) {
+  const { deleteRequired } = useContext(RequiredContext);
   const [showMain, setShowMain] = useState<boolean>(false);
-  console.log(required.item.image);
-  function IsShowMain() {
+  const btnRef = useRef<HTMLDivElement|null>(null);
+  
+  function isShowMain() {
     setShowMain(!showMain);
   }
+ 
+
+  useEffect(()=>{
+    
+    function handleClickBtn(event: MouseEvent){
+      if(btnRef.current?.contains(event.target as HTMLDivElement)){
+
+        setTimeout(() => {
+          isShowMain()
+        }, 1000);
+      } 
+    } 
+      document.addEventListener('mousedown',handleClickBtn);
+  },[showMain])
 
   return (
-    <Card isShow={showMain}>
-      <header>
+    <Card isShow={showMain} >
+      <header ref={btnRef}>
         <ThemeTitle className='' tag='h2' titleSize='title10' color='white'>
-          Reividicações - ID
+          Reivindicação - {id}
         </ThemeTitle>
-        <button type='button' onClick={IsShowMain}>
+        <button type='button' onClick={isShowMain}>
           <div className='btn-show' />
         </button>
       </header>
@@ -83,7 +100,11 @@ function CardCompany({ required, applicant, id, userId }: ICardCompany) {
       </CardContainer>
 
       <div className='btn-footer'>
-        <TrashBtn isShow={showMain} onClick={()=>DeleteRequired(id)} type='button'>
+        <TrashBtn
+          isShow={showMain}
+          onClick={() => deleteRequired(id)}
+          type='button'
+        >
           <GoTrashcan />
         </TrashBtn>
       </div>
