@@ -23,12 +23,18 @@ export const StyledDashboardCompanyHeader = styled.div`
   max-width: 1170px;
   height: 8.625rem;
 
+  .admin-title{
+    width: 100%;
+    max-width: 300px;
+    font-size: 40px;
+    color: var(--color-gray-1);
+  }
+
   svg {
     color: var(--color-gray-1);
   }
 
   @media screen and (max-width: 600px) {
-    justify-content: center;
     img{
         display: none;
       }

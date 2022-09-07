@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { BiUserCircle } from 'react-icons/bi';
+import { BiExit } from 'react-icons/bi';
 import logo from '../../assets/img/logo.svg';
 import { StyledDashboardCompanyHeader, Wrap } from './styles';
 
@@ -7,17 +7,23 @@ function DashboardCompanyHeader() {
   const navigate = useNavigate();
 
   function pageDirection() {
+    localStorage.clear();
     navigate('/register', { replace: true });
   }
 
   return (
     <Wrap>
-    <StyledDashboardCompanyHeader>
-       <img src={logo} alt='logomarca Encontre aqui' />
-      <div className='nav-bar'>
-        <BiUserCircle size={100} />
-      </div>
-    </StyledDashboardCompanyHeader>
+      <StyledDashboardCompanyHeader>
+        <img src={logo} alt='logomarca Encontre aqui' />
+
+        <div className='admin-title'>
+          <h1 className='admin-title'>Admin</h1>
+        </div>
+
+        <div className='nav-bar'>
+          <BiExit size={70} onClick={pageDirection} />
+        </div>
+      </StyledDashboardCompanyHeader>
     </Wrap>
   );
 }
