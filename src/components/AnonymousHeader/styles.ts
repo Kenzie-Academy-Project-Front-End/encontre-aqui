@@ -1,16 +1,20 @@
 import styled from 'styled-components';
+import { KeyframeOpacity } from '../Container';
 
 export const StyledAnonymousHeader = styled.div`
-  width: 100%;
-  height: 8.625rem;
   display: flex;
-  padding: 0 2rem;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
   background: var(--color-dark-blue-2);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  animation: ${KeyframeOpacity} 2.5s;
+  & > div {
+    height: 8.625rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
 
-  div {
+  .nav-bar {
     width: 40%;
     display: flex;
     justify-content: flex-end;
@@ -26,15 +30,17 @@ export const StyledAnonymousHeader = styled.div`
     }
 
     svg {
-      color: var(--color-gray-1);
+      color: var(--color-white);
     }
   }
 
   @media (max-width: 890px) {
-    height: 13rem;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.75rem;
+    & > div {
+      height: 13rem;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.75rem;
+    }
 
     img {
       width: 200px;
@@ -43,7 +49,7 @@ export const StyledAnonymousHeader = styled.div`
       min-height: 104px;
     }
 
-    div {
+    .nav-bar {
       flex-direction: column;
       gap: 0.75rem;
 

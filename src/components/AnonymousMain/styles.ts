@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledAnonymousMain = styled.div`
   width: 100%;
   height: 80vh;
-  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 `;
@@ -11,7 +10,7 @@ export const StyledAnonymousMain = styled.div`
 export const CardList = styled.ul`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 

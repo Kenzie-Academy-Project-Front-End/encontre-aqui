@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Container } from '../../components/Container';
 import { UserContext, IRegisterUser } from '../../contexts/UserContext';
-import { schema } from '../../validators/registerUser';
-import { StyledRegisterUser } from './styles';
+import { schema } from '../../validators/userRegister';
+import { StyledUserRegister } from './styles';
 import { ThemeTitle } from '../../styles/typography';
 import {
   Form,
@@ -15,9 +16,11 @@ import {
 } from '../../components/Form';
 import { ThemeButton } from '../../styles/buttons';
 import Logo from '../../assets/img/logo.svg';
+import imgRegister from '../../assets/img/imgRegister.svg';
 
-export const RegisterUser = () => {
+export const UserRegister = () => {
   const { registerUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,10 +30,10 @@ export const RegisterUser = () => {
 
   return (
     <Container>
-      <StyledRegisterUser>
-        <div className='logo'>
-          <img src={Logo} alt='logo' />
-        </div>
+      <StyledUserRegister>
+        <figure className='logo'>
+          <img src={Logo} alt='Logo Encontre Aqui' />
+        </figure>
 
         <Form onSubmit={handleSubmit(registerUser)}>
           <div className='title'>
@@ -39,7 +42,7 @@ export const RegisterUser = () => {
             </ThemeTitle>
           </div>
 
-          <ThemeLabel htmlFor='email'>Email:</ThemeLabel>
+          <ThemeLabel htmlFor='email'>Email *</ThemeLabel>
           <ThemeInput
             type='text'
             id='email'
@@ -49,7 +52,7 @@ export const RegisterUser = () => {
           />
           <ThemeErrorForm>{errors.email?.message}</ThemeErrorForm>
 
-          <ThemeLabel htmlFor='password'>Senha:</ThemeLabel>
+          <ThemeLabel htmlFor='password'>Senha *</ThemeLabel>
           <ThemeInput
             type='password'
             id='password'
@@ -59,7 +62,7 @@ export const RegisterUser = () => {
           />
           <ThemeErrorForm>{errors.password?.message}</ThemeErrorForm>
 
-          <ThemeLabel htmlFor='phone'>Telefone:</ThemeLabel>
+          <ThemeLabel htmlFor='phone'>Telefone *</ThemeLabel>
           <ThemeInput
             type='text'
             id='phone'
@@ -69,7 +72,7 @@ export const RegisterUser = () => {
           />
           <ThemeErrorForm>{errors.phone?.message}</ThemeErrorForm>
 
-          <ThemeLabel htmlFor='avatar'>URL Avatar:</ThemeLabel>
+          <ThemeLabel htmlFor='avatar'>URL Avatar</ThemeLabel>
           <ThemeInput
             type='text'
             id='avatar'
@@ -78,7 +81,7 @@ export const RegisterUser = () => {
             borderColor='success'
           />
 
-          <ThemeLabel htmlFor='social_network'>Rede Social:</ThemeLabel>
+          <ThemeLabel htmlFor='social_network'>Rede Social</ThemeLabel>
           <ThemeInput
             type='text'
             id='social_network'
@@ -94,12 +97,19 @@ export const RegisterUser = () => {
 
             <ThemeTextForm>Já possui conta?</ThemeTextForm>
 
-            <ThemeButton size='large' buttonColor='orange' type='button'>
+            <ThemeButton
+              size='large'
+              buttonColor='orange'
+              type='button'
+              onClick={() => navigate('/login')}
+            >
               Login
             </ThemeButton>
           </div>
+
+          <img className='userIlustration' src={imgRegister} alt='ilustração' />
         </Form>
-      </StyledRegisterUser>
+      </StyledUserRegister>
     </Container>
   );
 };
