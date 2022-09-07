@@ -22,6 +22,22 @@ interface IItem {
   id: number;
 }
 
+export interface IClaimItem {
+  user_required: {
+    email: string;
+    phone: string;
+    social_network: string | null;
+    item: IItem;
+  };
+  user_applicant: {
+    email: string;
+    phone: string;
+    description: string;
+    image: string;
+  };
+  userId: number;
+}
+
 interface IItemContext {
   itens: IItem[];
   inputValue: string;
@@ -33,6 +49,31 @@ interface IItemContext {
   paginateRigth: () => void;
   paginateLeft: () => void;
   setCounter: Dispatch<SetStateAction<number>>;
+}
+
+export interface IClaimItemResponse {
+  user_required: {
+    email: string;
+    phone: string;
+    social_network: string;
+    item: {
+      status: string;
+      image: string;
+      name: string;
+      description: string;
+      userId: number;
+      id: number;
+    };
+  };
+  user_applicant: {
+    email: string;
+    phone: string;
+    social_network: string;
+    description: string;
+    image: string;
+  };
+  userId: number;
+  id: number;
 }
 
 export const ItemContext = createContext({} as IItemContext);
@@ -102,6 +143,20 @@ export function ItemProvider({ children }: IItemProviderProps) {
       setHistoricCounter(counter - 6);
     }
   }
+
+  // function claimItem(data: any) {
+  //   const token = window.localStorage.getItem('token');
+  //   const responseClaim = api
+  //     .post<IClaimItemResponse>('/claim', data, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((response) => response);
+  //   toast.promise(responseClaim, {
+  //     pending: 'Enviando...',
+  //     success: 'Reivindicação realizada com sucesso!',
+  //     error: 'Erro ao realizar reivindicação!',
+  //   });
+  // }
 
   return (
     <ItemContext.Provider

@@ -43,6 +43,15 @@ interface IUserResponse {
   id: number;
 }
 
+interface IUserClaim {
+  email: string;
+  password: string;
+  phone: string;
+  avatar: string;
+  social_network: string;
+  id: number;
+}
+
 export interface ILogin {
   email: string;
   password: string;
@@ -50,7 +59,7 @@ export interface ILogin {
   accessToken: string;
 }
 
-interface Itens {
+export interface Itens {
   status: string;
   image: string;
   name: string;
@@ -92,6 +101,7 @@ interface IUserContext {
   claim: IClaim[];
   control: boolean;
   setControl: Dispatch<SetStateAction<boolean>>;
+  userClaim: IUserClaim;
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -104,6 +114,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [icon, setIcon] = useState<boolean>(true);
   const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
   const [history, setHistory] = useState<boolean>(false);
+  const [userClaim, setUserClaim] = useState<IUserClaim>({} as IUserClaim);
   const navigate = useNavigate();
 
   function registerUser(data: IRegisterUser) {
@@ -169,6 +180,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     if (userID) {
       api.get(`/users/${userID}`).then((res) => {
         setUser(res.data);
+        setUserClaim(res.data);
       });
     }
   }, [control]);
@@ -219,6 +231,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         claim,
         control,
         setControl,
+        userClaim,
       }}
     >
       {children}

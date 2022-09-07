@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { ClaimContext } from '../../contexts/ClaimContext';
 import { ItemContext } from '../../contexts/ItemContext';
 import { UserContext } from '../../contexts/UserContext';
 import { ThemeButton } from '../../styles/buttons';
@@ -8,6 +9,8 @@ import { StyledCardUser } from './styles';
 function CardUser() {
   const { itens, counter } = useContext(ItemContext);
   const { user, claim } = useContext(UserContext);
+  const { modalClaim, setModalClaim, setItemId, getDataItem, getDataUser } =
+    useContext(ClaimContext);
 
   return (
     <>
@@ -38,7 +41,16 @@ function CardUser() {
                   Reivindicar
                 </ThemeButton>
               ) : (
-                <ThemeButton size='small' buttonColor='dark-blue'>
+                <ThemeButton
+                  size='small'
+                  buttonColor='dark-blue'
+                  onClick={() => {
+                    setModalClaim(!modalClaim);
+                    setItemId(item.id);
+                    getDataItem(item.id);
+                    getDataUser(item.userId);
+                  }}
+                >
                   Reivindicar
                 </ThemeButton>
               )}
