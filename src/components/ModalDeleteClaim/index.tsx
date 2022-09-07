@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import { ClaimContext } from '../../contexts/ClaimContext';
+import { outsideClickModalDeleteClaim } from '../../hooks/outsideClickModalDeleteClaim';
 import { ThemeButton } from '../../styles/buttons';
 import { ThemeTitle } from '../../styles/typography';
 import { StyledModalDeleteClaim } from './styles';
@@ -8,9 +9,14 @@ import { StyledModalDeleteClaim } from './styles';
 function ModalDeleteClaim() {
   const { modalDeleteClaim, setModalDeleteClaim, deleteClaim } =
     useContext(ClaimContext);
+
+  const deleteClaimModal = outsideClickModalDeleteClaim(() => {
+    setModalDeleteClaim(!modalDeleteClaim);
+  });
+
   return (
     <StyledModalDeleteClaim>
-      <div>
+      <div ref={deleteClaimModal}>
         <ThemeButton
           size='close'
           buttonColor='false'
