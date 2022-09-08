@@ -184,13 +184,15 @@ export function ItemProvider({ children }: IItemProviderProps) {
       .post<IClaimItemResponse>('/claim', data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => response);
+      .then((response) => {
+        setControl(!control);
+        return response;
+      });
     toast.promise(responseClaim, {
       pending: 'Enviando...',
       success: 'Reivindicação realizada com sucesso!',
       error: 'Erro ao realizar reivindicação!',
     });
-    setControl(!control);
   }
 
   function registerItem(data: IRegisterItem) {
