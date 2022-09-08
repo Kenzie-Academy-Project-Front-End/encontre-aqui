@@ -2,7 +2,6 @@ import { toast } from 'react-toastify';
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { api } from '../services/api';
 
-
 interface IItem {
   status: string;
   image: string;
@@ -36,7 +35,7 @@ interface IRequired {
 
 interface IRequiredContext {
   requireds: IRequired[];
-  deleteRequired: (id:number)=> void;
+  deleteRequired: (id: number) => void;
 }
 
 interface IRequiredProviderProps {
@@ -47,7 +46,6 @@ export const RequiredContext = createContext({} as IRequiredContext);
 
 export function RequiredProvider({ children }: IRequiredProviderProps) {
   const [requireds, setRequired] = useState<IRequired[]>([]);
-
 
   function sucessDeleteRequired() {
     toast.success('Reivindicação deletada com sucesso', {
@@ -65,22 +63,19 @@ export function RequiredProvider({ children }: IRequiredProviderProps) {
     });
   }
 
-
   function deleteRequired(id: number) {
     const token = window.localStorage.getItem('@encontreAqui:adminToken');
-  
-    api.delete(`/claim/${id}`,  {
-      headers: {Authorization: `Bearer ${token}`}
-  }
-    ).then(()=>sucessDeleteRequired())
-    .catch(()=>errorDeleteRequired());
+    api
+      .delete(`/claim/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => sucessDeleteRequired())
+      .catch(() => errorDeleteRequired());
   }
 
   useEffect(() => {
     api.get<IRequired[]>('/claim').then((res) => setRequired(res.data));
   }, [requireds]);
-
-
 
   return (
     <RequiredContext.Provider value={{ requireds, deleteRequired }}>

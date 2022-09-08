@@ -126,8 +126,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         toast.success('Cadastro realizado com sucesso!');
         navigate('/login', { replace: true });
       })
-      .catch((err) => {
-        toast.error(err?.response?.data);
+      .catch(() => {
+        toast.error('Erro ao realizar cadastro!');
       });
   }
 
@@ -142,8 +142,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         navigate('/user', { replace: true });
         setControl(!control);
       })
-      .catch((err) => {
-        toast.error(err?.response?.data, { autoClose: 2000 });
+      .catch(() => {
+        toast.error('Erro ao realizar login!', { autoClose: 2000 });
       });
   }
 
