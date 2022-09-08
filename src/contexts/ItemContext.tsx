@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
-import { UserContext } from './UserContext';
+import { IClaim, UserContext } from './UserContext';
 
 interface IItemProviderProps {
   children: ReactNode;
@@ -70,6 +70,8 @@ interface IItemContext {
   openModalDeleteItem: boolean;
   setOpenModalDeleteItem: Dispatch<SetStateAction<boolean>>;
   claimItem: (data: IClaimItem) => void;
+  claimD: IClaim[];
+  setClaimD: Dispatch<SetStateAction<IClaim[]>>;
 }
 
 export interface IClaimItemResponse {
@@ -110,6 +112,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
   const [openModalDeleteItem, setOpenModalDeleteItem] =
     useState<boolean>(false);
+  const [claimD, setClaimD] = useState<IClaim[]>([]);
 
   const { setControl, control, user } = useContext(UserContext);
 
@@ -254,6 +257,23 @@ export function ItemProvider({ children }: IItemProviderProps) {
         }, 2000);
       })
       .catch(() => toast.error('Erro ao deletar o item!', { autoClose: 1500 }));
+
+    api.get(`/claim`).then((response) => {
+      response.data
+        .filter(
+          (claim: IClaim) =>
+            String(claim.user_required.item.id) === String(currentItem?.id)
+        )
+        .forEach((element: IClaim) => {
+          api
+            .delete(`/claim/${element.id}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            })
+            .then(() => setControl(!control));
+        });
+    });
   }
 
   return (
@@ -281,6 +301,8 @@ export function ItemProvider({ children }: IItemProviderProps) {
         openModalDeleteItem,
         setOpenModalDeleteItem,
         claimItem,
+        claimD,
+        setClaimD,
       }}
     >
       {children}

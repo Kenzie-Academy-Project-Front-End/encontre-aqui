@@ -68,7 +68,7 @@ export interface Itens {
   id: number;
 }
 
-interface IClaim {
+export interface IClaim {
   user_required: {
     email: string;
     phone: string;
