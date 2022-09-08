@@ -180,19 +180,19 @@ export function ItemProvider({ children }: IItemProviderProps) {
 
   function claimItem(data: IClaimItem) {
     const token = window.localStorage.getItem('token');
-    const responseClaim = api
+    api
       .post<IClaimItemResponse>('/claim', data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => {
-        setControl(!control);
-        return response;
+      .then((res) => res)
+      .catch(() => {
+        toast.success('Erro ao realizar reivindicação!', {
+          autoClose: 1500,
+        });
+        setTimeout(() => {
+          setControl(!control);
+        }, 2000);
       });
-    toast.promise(responseClaim, {
-      pending: 'Enviando...',
-      success: 'Reivindicação realizada com sucesso!',
-      error: 'Erro ao realizar reivindicação!',
-    });
   }
 
   function registerItem(data: IRegisterItem) {
@@ -208,9 +208,11 @@ export function ItemProvider({ children }: IItemProviderProps) {
         }
       )
       .then(() => {
-        toast.success('Item cadastrado com sucesso!');
-        setOpenModal(false);
-        setControl(!control);
+        toast.success('Item cadastrado com sucesso!', { autoClose: 1500 });
+        setTimeout(() => {
+          setOpenModal(false);
+          setControl(!control);
+        }, 2000);
       })
       .catch(() => toast.error('Erro ao cadastrar item'));
   }
@@ -224,10 +226,12 @@ export function ItemProvider({ children }: IItemProviderProps) {
         },
       })
       .then(() => {
-        toast.success('Item editado com sucesso!');
-        setOpenModalEdit(false);
-        setControl(!control);
-        setCurrentItem(null);
+        toast.success('Item editado com sucesso!', { autoClose: 1500 });
+        setTimeout(() => {
+          setOpenModalEdit(false);
+          setControl(!control);
+          setCurrentItem(null);
+        }, 2000);
       })
       .catch(() => toast.error('Erro ao editar o item!'));
   }

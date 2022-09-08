@@ -17,28 +17,25 @@ interface ICardCompany {
 function CardCompany({ required, applicant, id }: ICardCompany) {
   const { deleteRequired } = useContext(RequiredContext);
   const [showMain, setShowMain] = useState<boolean>(false);
-  const btnRef = useRef<HTMLDivElement|null>(null);
-  
+  const btnRef = useRef<HTMLDivElement | null>(null);
+
   function isShowMain() {
     setShowMain(!showMain);
   }
- 
 
-  useEffect(()=>{
-    
-    function handleClickBtn(event: MouseEvent){
-      if(btnRef.current?.contains(event.target as HTMLDivElement)){
-
+  useEffect(() => {
+    function handleClickBtn(event: MouseEvent) {
+      if (btnRef.current?.contains(event.target as HTMLDivElement)) {
         setTimeout(() => {
-          isShowMain()
+          isShowMain();
         }, 1000);
-      } 
-    } 
-      document.addEventListener('mousedown',handleClickBtn);
-  },[showMain])
+      }
+    }
+    document.addEventListener('mousedown', handleClickBtn);
+  }, [showMain]);
 
   return (
-    <Card isShow={showMain} >
+    <Card isShow={showMain}>
       <header ref={btnRef}>
         <ThemeTitle className='' tag='h2' titleSize='title10' color='white'>
           Reivindicação - {id}
@@ -62,7 +59,9 @@ function CardCompany({ required, applicant, id }: ICardCompany) {
           <div className='card-container-one__body'>
             <div className='container-one'>
               <img src={required.item.image} alt={required.item.name} />
-              <strong className='container-one__status'>{required.item.status === "lost" ? "Perdido" : "Encontrado"}</strong>
+              <strong className='container-one__status'>
+                {required.item.status === 'lost' ? 'Perdido' : 'Encontrado'}
+              </strong>
               <h4>{required.item.name}</h4>
               <p>{required.item.description}</p>
             </div>
