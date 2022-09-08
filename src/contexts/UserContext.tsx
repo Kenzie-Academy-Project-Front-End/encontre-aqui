@@ -102,6 +102,7 @@ interface IUserContext {
   control: boolean;
   setControl: Dispatch<SetStateAction<boolean>>;
   userClaim: IUserClaim;
+  allClaim: IClaim[];
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -110,6 +111,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [control, setControl] = useState<boolean>(false);
   const [itens, setItens] = useState<Itens[]>([]);
   const [claim, setClaim] = useState<IClaim[]>([]);
+  const [allClaim, setAllClaim] = useState<IClaim[]>([]);
   const [type, setType] = useState<string>('password');
   const [icon, setIcon] = useState<boolean>(true);
   const [user, setUser] = useState<IUserResponse>({} as IUserResponse);
@@ -170,6 +172,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   }, [control]);
 
   useEffect(() => {
+    api.get(`/claim`).then((response) => {
+      setAllClaim(response.data);
+    });
+  }, [control]);
+
+  useEffect(() => {
     const userID = window.localStorage.getItem('userID');
 
     if (userID) {
@@ -227,6 +235,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         control,
         setControl,
         userClaim,
+        allClaim,
       }}
     >
       {children}
