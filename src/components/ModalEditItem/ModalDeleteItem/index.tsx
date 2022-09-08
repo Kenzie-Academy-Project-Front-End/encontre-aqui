@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
+import { ClaimContext } from '../../../contexts/ClaimContext';
 import { ItemContext } from '../../../contexts/ItemContext';
 import { ThemeButton } from '../../../styles/buttons';
 import { ThemeTitle } from '../../../styles/typography';
@@ -8,6 +9,7 @@ import { StyledModalDeleteClaim } from './styles';
 export function ModalDeleteItem() {
   const { deleteItem, openModalDeleteItem, setOpenModalDeleteItem } =
     useContext(ItemContext);
+  const { deleteClaimUser } = useContext(ClaimContext);
 
   return (
     <StyledModalDeleteClaim>
@@ -35,7 +37,10 @@ export function ModalDeleteItem() {
             className='button-delete'
             size='small'
             buttonColor='dark-blue'
-            onClick={() => deleteItem()}
+            onClick={() => {
+              deleteItem();
+              deleteClaimUser();
+            }}
             type='button'
           >
             Excluir
