@@ -215,6 +215,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
         setTimeout(() => {
           setOpenModal(false);
           setControl(!control);
+          setFilter('');
         }, 2000);
       })
       .catch(() => toast.error('Erro ao cadastrar item'));
@@ -254,6 +255,8 @@ export function ItemProvider({ children }: IItemProviderProps) {
           setOpenModalEdit(false);
           setControl(!control);
           setCurrentItem(null);
+          setFilter('');
+          setFilter('all');
         }, 2000);
       })
       .catch(() => toast.error('Erro ao deletar o item!', { autoClose: 1500 }));
