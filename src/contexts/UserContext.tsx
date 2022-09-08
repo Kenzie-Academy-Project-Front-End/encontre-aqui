@@ -166,13 +166,6 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           response.data.filter((item: IClaim) => String(item.userId) === userID)
         );
       });
-
-      // console.log(claim)
-
-
-      // api.get(`/users/${userID}?_embed=claim`).then((response) => {
-      //   setClaim(response.data.claim);
-      // });
     }
   }, [control]);
 
