@@ -146,7 +146,7 @@ export function ItemProvider({ children }: IItemProviderProps) {
         setCounter(0);
       });
     }
-  }, [filter, inputValue, counter]);
+  }, [filter, inputValue, counter, control]);
 
   function errorClaim() {
     toast.warn('Faça login ou cadastre-se para reivindicar um item', {
