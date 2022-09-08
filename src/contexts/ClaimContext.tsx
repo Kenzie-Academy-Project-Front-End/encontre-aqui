@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
+import { ItemContext } from './ItemContext';
 import { UserContext } from './UserContext';
 
 interface IClaimProviderProps {
@@ -45,6 +46,7 @@ interface IClaimContext {
   dataItem: IDataItem;
   getDataItem: (data: number) => void;
   getDataUser: (data: number) => void;
+  deleteClaimUser: () => void;
 }
 
 export const ClaimContext = createContext({} as IClaimContext);
@@ -53,10 +55,28 @@ export function ClaimProvider({ children }: IClaimProviderProps) {
   const [modalDeleteClaim, setModalDeleteClaim] = useState<boolean>(false);
   const [modalClaim, setModalClaim] = useState<boolean>(false);
   const [idClaim, setIdClaim] = useState<number | null>(null);
-  const { control, setControl } = useContext(UserContext);
+  const { control, setControl, allClaim } = useContext(UserContext);
   const [itemId, setItemId] = useState<number | null>(null);
   const [dataUser, setDataUser] = useState<IDataUser>({} as IDataUser);
   const [dataItem, setDataItem] = useState<IDataItem>({} as IDataItem);
+  const { currentItem } = useContext(ItemContext);
+
+  function deleteClaimUser() {
+    const token = window.localStorage.getItem('token');
+
+    if (currentItem) {
+      const claimId = allClaim.find(
+        (item) => item.user_required.item.id === currentItem.id
+      );
+
+      api
+        .delete(`/claim/${claimId?.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => res)
+        .catch((err) => err);
+    }
+  }
 
   function sucessDeleteClaim() {
     toast.success('Reivindicação deletada com sucesso', {
@@ -120,6 +140,7 @@ export function ClaimProvider({ children }: IClaimProviderProps) {
         dataItem,
         getDataItem,
         getDataUser,
+        deleteClaimUser,
       }}
     >
       {children}
