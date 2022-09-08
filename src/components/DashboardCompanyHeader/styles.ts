@@ -34,7 +34,7 @@ export const StyledDashboardCompanyHeader = styled.div`
     color: var(--color-gray-1);
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 771px) {
     img{
         display: none;
       }

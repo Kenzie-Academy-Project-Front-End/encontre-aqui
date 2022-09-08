@@ -62,7 +62,7 @@ function CardCompany({ required, applicant, id }: ICardCompany) {
           <div className='card-container-one__body'>
             <div className='container-one'>
               <img src={required.item.image} alt={required.item.name} />
-              <strong>{required.item.status}</strong>
+              <strong className='container-one__status'>{required.item.status === "lost" ? "Perdido" : "Encontrado"}</strong>
               <h4>{required.item.name}</h4>
               <p>{required.item.description}</p>
             </div>

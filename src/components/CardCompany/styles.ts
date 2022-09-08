@@ -131,7 +131,7 @@ export const CardContainer = styled.main`
     }
     .card-container-one__body {
       display: flex;
-
+      justify-content: space-between;
       width: 100%;
       max-width: 671px;
       height: 440px;
@@ -159,14 +159,24 @@ export const CardContainer = styled.main`
           width: 100%;
           max-width: 225px;
           height: 133px;
+          border-radius: 18px 5px;
+          border: 1px solid var(--color-gray-1);
         }
         strong {
           font-weight: 300;
+        }
+        p{
+          text-align: center;
+        }
+
+        .container-one__status{
+          text-transform: uppercase;
         }
       }
       .container-two {
         display: flex;
         flex-direction: column;
+        align-items: center;
 
         width: 100%;
         max-width: 300px;
@@ -193,6 +203,7 @@ export const CardContainer = styled.main`
   .card-container-two {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     width: 100%;
     max-width: 270px;
@@ -202,6 +213,7 @@ export const CardContainer = styled.main`
     .card-container-two__body {
       display: flex;
       flex-direction: column;
+      align-items: center;
 
       width: 100%;
       max-width: 270px;
@@ -222,6 +234,7 @@ export const CardContainer = styled.main`
 
       strong {
         font-weight: bold;
+        text-align: center;
       }
 
       @media screen and (max-width: 826px) {
