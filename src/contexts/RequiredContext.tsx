@@ -35,7 +35,7 @@ interface IRequired {
 
 interface IRequiredContext {
   requireds: IRequired[];
-  deleteRequired: (id: number) => void;
+  deleteRequired: (id:number, idItem: number)=> void;
 }
 
 interface IRequiredProviderProps {
@@ -63,14 +63,20 @@ export function RequiredProvider({ children }: IRequiredProviderProps) {
     });
   }
 
-  function deleteRequired(id: number) {
+  function deleteRequired(id: number, idItem: number ) {
     const token = window.localStorage.getItem('@encontreAqui:adminToken');
-    api
-      .delete(`/claim/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => sucessDeleteRequired())
-      .catch(() => errorDeleteRequired());
+  
+    api.delete(`/claim/${id}`,  {
+      headers: {Authorization: `Bearer ${token}`}
+  }
+    ).then(()=>sucessDeleteRequired())
+    .catch(()=>errorDeleteRequired());
+
+    api.delete(`/itens/${idItem}`,  {
+      headers: {Authorization: `Bearer ${token}`}
+  }
+    ).then(()=>sucessDeleteRequired())
+    .catch(()=>errorDeleteRequired());
   }
 
   useEffect(() => {

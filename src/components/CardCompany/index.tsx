@@ -102,7 +102,7 @@ function CardCompany({ required, applicant, id }: ICardCompany) {
       <div className='btn-footer'>
         <TrashBtn
           isShow={showMain}
-          onClick={() => deleteRequired(id)}
+          onClick={() => deleteRequired(id, required.item.id)}
           type='button'
         >
           <GoTrashcan />
