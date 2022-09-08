@@ -1,6 +1,13 @@
 import { toast } from 'react-toastify';
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { api } from '../services/api';
+import { UserContext } from './UserContext';
 
 interface IItem {
   status: string;
@@ -35,7 +42,7 @@ interface IRequired {
 
 interface IRequiredContext {
   requireds: IRequired[];
-  deleteRequired: (id:number, idItem: number)=> void;
+  deleteRequired: (id: number, idItem: number) => void;
 }
 
 interface IRequiredProviderProps {
@@ -46,6 +53,7 @@ export const RequiredContext = createContext({} as IRequiredContext);
 
 export function RequiredProvider({ children }: IRequiredProviderProps) {
   const [requireds, setRequired] = useState<IRequired[]>([]);
+  const { control, setControl } = useContext(UserContext);
 
   function sucessDeleteRequired() {
     toast.success('Reivindicação deletada com sucesso', {
@@ -63,20 +71,24 @@ export function RequiredProvider({ children }: IRequiredProviderProps) {
     });
   }
 
-  function deleteRequired(id: number, idItem: number ) {
+  function deleteRequired(id: number, idItem: number) {
     const token = window.localStorage.getItem('@encontreAqui:adminToken');
-  
-    api.delete(`/claim/${id}`,  {
-      headers: {Authorization: `Bearer ${token}`}
-  }
-    ).then(()=>sucessDeleteRequired())
-    .catch(()=>errorDeleteRequired());
 
-    api.delete(`/itens/${idItem}`,  {
-      headers: {Authorization: `Bearer ${token}`}
-  }
-    ).then(()=>sucessDeleteRequired())
-    .catch(()=>errorDeleteRequired());
+    api
+      .delete(`/claim/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => setControl(!control));
+
+    api
+      .delete(`/itens/${idItem}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        sucessDeleteRequired();
+        setControl(!control);
+      })
+      .catch(() => errorDeleteRequired());
   }
 
   useEffect(() => {
