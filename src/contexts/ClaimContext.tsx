@@ -73,7 +73,7 @@ export function ClaimProvider({ children }: IClaimProviderProps) {
         .delete(`/claim/${claimId?.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then((res) => res)
+        .then(() => setControl(!control))
         .catch((err) => err);
     }
   }
