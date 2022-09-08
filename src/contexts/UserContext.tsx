@@ -9,7 +9,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../services/api';
-import { IItem } from './ItemContext';
 
 interface IUserProviderProps {
   children: ReactNode;
@@ -167,6 +166,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
           response.data.filter((item: IClaim) => String(item.userId) === userID)
         );
       });
+
+      // console.log(claim)
+
+
+      // api.get(`/users/${userID}?_embed=claim`).then((response) => {
+      //   setClaim(response.data.claim);
+      // });
     }
   }, [control]);
 

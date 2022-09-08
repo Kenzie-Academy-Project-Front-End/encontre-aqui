@@ -20,7 +20,9 @@ function CardUser() {
             key={item.id}
             userLog={item.userId}
             user={user.id}
-            claim={claim[index]?.userId}
+            claim={claim.some(
+              (elem) => String(elem.user_required.item.id) === String(item.id)
+            )}
           >
             <img src={item.image} alt='imagem do item' />
             <div>
@@ -36,7 +38,10 @@ function CardUser() {
                 <span>Descrição: </span>
                 {item.description}
               </p>
-              {item.userId === user.id ? (
+              {item.userId === user.id ||
+              claim.some(
+                (elem) => String(elem.user_required.item.id) === String(item.id)
+              ) ? (
                 <ThemeButton size='small' buttonColor='dark-blue' disabled>
                   Reivindicar
                 </ThemeButton>
@@ -49,6 +54,18 @@ function CardUser() {
                     setItemId(item.id);
                     getDataItem(item.id);
                     getDataUser(item.userId);
+
+                    // console.log(item.id);
+                    // console.log(claim);
+
+                    // console.log(claim[0].user_required.item.id);
+                    // // // console.log(user.id);
+                    // console.log(
+                    //   claim.some(
+                    //     (elem) =>
+                    //       String(elem.user_required.item.id) === String(item.id)
+                    //   )
+                    // );
                   }}
                 >
                   Reivindicar

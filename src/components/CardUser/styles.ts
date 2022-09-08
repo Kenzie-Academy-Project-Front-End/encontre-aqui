@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface IStyledCardUser {
   user: number;
   userLog: number;
-  claim: number;
+  claim: boolean;
 }
 
 export const StyledCardUser = styled.li<IStyledCardUser>`
@@ -18,7 +18,7 @@ export const StyledCardUser = styled.li<IStyledCardUser>`
   animation: scale-in 1.5s;
   background-color: var(--color-white);
   opacity: ${({ userLog, user, claim }) =>
-    userLog === user || user === claim ? 0.5 : 1};
+    userLog === user || claim === true ? 0.5 : 1};
 
   @keyframes scale-in {
     0% {
@@ -68,7 +68,7 @@ export const StyledCardUser = styled.li<IStyledCardUser>`
       height: 3.938rem;
       font-size: 1.25rem;
       cursor: ${({ userLog, user, claim }) =>
-        userLog === user || user === claim ? 'not-allowed' : 'pointer'};
+        userLog === user || claim === true ? 'not-allowed' : 'pointer'};
     }
   }
 
