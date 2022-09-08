@@ -85,8 +85,8 @@ export function RequiredProvider({ children }: IRequiredProviderProps) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
-        sucessDeleteRequired();
-        setControl(!control);
+          sucessDeleteRequired();
+          setControl(!control);
       })
       .catch(() => errorDeleteRequired());
   }

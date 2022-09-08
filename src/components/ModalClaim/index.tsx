@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaRegWindowClose } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import { formSchema } from '../../validators/itemClaim';
 import { ThemeButton } from '../../styles/buttons';
 import { ThemeTitle } from '../../styles/typography';
@@ -13,9 +14,10 @@ import { ThemeErrorForm } from '../Form';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 export const ModalClaim = () => {
-  const { setModalClaim, dataItem, dataUser } = useContext(ClaimContext);
+  const { setModalClaim, modalClaim, dataItem, dataUser } =
+    useContext(ClaimContext);
   const { claimItem } = useContext(ItemContext);
-  const { userClaim } = useContext(UserContext);
+  const { userClaim, control, setControl } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -49,28 +51,32 @@ export const ModalClaim = () => {
     claimItem(dataClaim);
   }
 
-  const getDescription = (data: any) => {
-    setModalClaim(!setModalClaim);
-    juntarInfos(data);
+  const getDescription = (data: Itens) => {
+    toast.success('Reivindicação realizada com sucesso!', {
+      autoClose: 1500,
+    });
+    setTimeout(() => {
+      juntarInfos(data);
+      setControl(!control);
+      setModalClaim(!modalClaim);
+    }, 2000);
   };
 
   const modalRef = useOutsideClick(() => {
-    setModalClaim(!setModalClaim);
+    setModalClaim(!modalClaim);
   });
 
   return (
     <StyledModalClaim>
       <div className='content'>
         <div className='header'>
-         
-
           <div className='close'>
             <FaRegWindowClose
               size={30}
               color='white'
               className='close'
               onClick={() => {
-                setModalClaim(!setModalClaim);
+                setModalClaim(!modalClaim);
               }}
             />
           </div>
@@ -78,14 +84,14 @@ export const ModalClaim = () => {
 
         <div className='divForm'>
           <form ref={modalRef} onSubmit={handleSubmit(getDescription)}>
-          <ThemeTitle
-            className='title'
-            tag='h2'
-            titleSize='title1'
-            color='white'
-          >
-            Reivindicação
-          </ThemeTitle>
+            <ThemeTitle
+              className='title'
+              tag='h2'
+              titleSize='title1'
+              color='white'
+            >
+              Reivindicação
+            </ThemeTitle>
             <textarea
               className='textArea'
               {...register('description')}
